@@ -1,0 +1,7 @@
+<div class="container">
+  @for (categoria of listCategorias(); track categoria) {
+    <div class="container-category">
+      <a [href]="categoria.categoria_url">{{ categoria.categoria_name }}</a>
+    </div>
+  }
+</div>
