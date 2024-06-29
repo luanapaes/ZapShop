@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    height: 550px;
+    background-image: url(../../src/assets/back-2.png);
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-categories{
+    margin: 0;
+    height: 90px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.full-width {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
