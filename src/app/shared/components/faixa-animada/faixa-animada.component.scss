@@ -15,6 +15,10 @@
     white-space: nowrap;
     position: absolute;
     animation: marquee 40s linear infinite;
+
+    p{
+        color:#F0FFF8;
+    }
 }
 
 @keyframes marquee {
