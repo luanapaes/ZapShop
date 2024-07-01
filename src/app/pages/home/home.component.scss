@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 550px;
+    background-image: url(../../../assets/back-2.png);
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-categories {
+    margin: 0;
+    height: 90px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.full-width {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.conheca {
+    height: 300px;
+    color: #094D2C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        color: #107242;
+    }
+
+    p {
+        font-size: 1.11em;
+        margin: 0 auto;
+        width: 90%;
+    }
+}
+
+.marcas {
+    padding: 0 2%;
+
+    h2 {
+        text-align: center;
+        font-size: 2em;
+    }
+}
+
+footer {
+    margin-top: 5%;
+    height: 60px;
+    border-top: 1px solid #094d2c13;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
