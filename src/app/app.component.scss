@@ -13,7 +13,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.container-categories{
+.container-categories {
     margin: 0;
     height: 90px;
     height: 100%;
@@ -29,22 +29,29 @@ body {
     height: 100%;
 }
 
-.conheca{
+.conheca {
     height: 300px;
     color: #094D2C;
-    border-bottom: 1px solid #094D2C;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    h1{
+    h1 {
         color: #107242;
     }
 
-    p{
+    p {
         font-size: 1.11em;
         margin: 0 auto;
         width: 90%;
+    }
+}
+
+.marcas {
+    padding: 0 2%;
+    h2 {
+        text-align: center;
+        font-size: 2em;
     }
 }
