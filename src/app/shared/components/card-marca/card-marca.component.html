@@ -1,0 +1,7 @@
+<div class="grid-container">
+    @for (marca of listMarcas(); track marca) {
+        <div class="grid-item item{{ $index + 1 }}" 
+            [style.background-image]="'url(' + marca.url_logo + ')'"[attr.nome-marca]="marca.nome_marca">
+        </div>
+    }
+</div>
