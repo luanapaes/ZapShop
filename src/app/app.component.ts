@@ -10,18 +10,9 @@ import { CardProdutoComponent } from './shared/components/card-produto/card-prod
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, 
-    FaixaAnimadaComponent, ButtonBrandComponent, 
-    CardMarcaComponent, FooterComponent,
-    CardProdutoComponent
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  productName = 'Floratta Rose';
-  productPrice = '130,00'
-  productDescription = 'Perfume feminino de alta fixação ideal para o dia.';
-  productMarca = 'oBoticário';
-  productCategory = 'Perfume'
 }
