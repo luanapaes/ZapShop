@@ -1,0 +1,49 @@
+.card-product {
+    min-height: 400px;
+    height: auto;
+    width: 33%;
+
+    border-radius: 15px;
+    box-shadow: -3px -2px 58px -22px rgba(18, 54, 21, 1);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .card-image {
+        display: flex;
+        justify-content: center;
+        height: 60%;
+        width: 100%;
+        // background-image: url(../../../../assets/produtos/floratta.jpg);
+    }
+
+    .card-info-product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .etiquetas {
+            color: #094D2C;
+            width: 50%;
+            display: flex;
+            justify-content: space-around;
+
+            span {
+                border: 1px solid #094D2C;
+                border-radius: 25px;
+                padding: 3px 5px;
+                transition: background-color .3s ease-out;
+            }
+
+            span:hover {
+                background-color: #F0FFF8;
+            }
+        }
+    }
+}
