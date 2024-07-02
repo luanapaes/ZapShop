@@ -2,10 +2,17 @@
     <div class="image"></div>
     <div class="links">
         <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Produtos</a></li>
-            <li><a href="">Quem somos</a></li>
-            <li><a href=""><i class="far fa-user"></i></a></li>
+            @if (isHome) {
+                <li><a routerLink="">Home</a></li>
+            }
+            <li><a routerLink="/produtos">Produtos</a></li>
+            @if (isHome) {
+             <li>
+                <button class="btn-cart"><i class="fas fa-cart-plus"></i></button>
+             </li>
+            }
+            <li><a><i class="far fa-user"></i></a></li>
         </ul>
+
     </div>
 </div>
