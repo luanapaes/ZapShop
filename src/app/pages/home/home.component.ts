@@ -17,5 +17,5 @@ import { HeaderComponent } from '../../shared/components/header/header.component
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  isHome: boolean = false;
 }
