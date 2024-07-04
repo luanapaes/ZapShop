@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartComponent } from '../cart/cart.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +12,12 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   @Input() isHome: boolean = true;
+  constructor(public dialog: MatDialog) { }
+
+  openCart() {
+    this.dialog.open(CartComponent).
+    afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

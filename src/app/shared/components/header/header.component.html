@@ -8,7 +8,7 @@
             <li><a routerLink="/produtos">Produtos</a></li>
             @if (isHome) {
              <li>
-                <button class="btn-cart"><i class="fas fa-cart-plus"></i></button>
+                <button class="btn-cart" (click)="openCart()"><i class="fas fa-cart-plus"></i></button>
              </li>
             }
             <li><a><i class="far fa-user"></i></a></li>
