@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { Produto } from '../../interfaces/produto.interface';
+import { CarrinhoService } from '../../services/CarrinhoService.service';
 
 @Component({
   selector: 'app-button-add-to-bag',
@@ -8,10 +10,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button-add-to-bag.component.scss'
 })
 export class ButtonAddToBagComponent {
-  @Input() productId: string = '';
+  @Input() productCart!: Produto;
+  carrinhoService = inject(CarrinhoService);
 
-  verId(){
-    console.log(this.productId)
+  addProductToBag() {
+    this.carrinhoService.addProductToBag(
+      this.productCart.product_id, this.productCart.product_name,
+      this.productCart.product_price, this.productCart.product_description, 
+      this.productCart.product_marca,this.productCart.product_categoria
+    )
   }
 
 }
