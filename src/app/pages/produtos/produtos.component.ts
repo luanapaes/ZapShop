@@ -17,7 +17,7 @@ export class ProdutosComponent {
     {
       product_id: '10',
       product_name: 'Floratta Rose',
-      product_price: '130,00',
+      product_price: 130.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'oBoticário',
       product_categoria: 'Perfume'
@@ -25,7 +25,7 @@ export class ProdutosComponent {
     {
       product_id: '11',
       product_name: 'Malbec Strong',
-      product_price: '210,00',
+      product_price: 120.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'oBoticário',
       product_categoria: 'Perfume'
@@ -33,7 +33,7 @@ export class ProdutosComponent {
     {
       product_id: '12',
       product_name: 'Kit Todo dia',
-      product_price: '75,00',
+      product_price: 120.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'Natura',
       product_categoria: 'Kit'
@@ -41,7 +41,7 @@ export class ProdutosComponent {
     {
       product_id: '11',
       product_name: 'Malbec Strong',
-      product_price: '210,00',
+      product_price: 210.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'oBoticário',
       product_categoria: 'Perfume'
@@ -49,7 +49,7 @@ export class ProdutosComponent {
     {
       product_id: '12',
       product_name: 'Kit Todo dia',
-      product_price: '75,00',
+      product_price: 75.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'Natura',
       product_categoria: 'Kit'
@@ -57,7 +57,7 @@ export class ProdutosComponent {
     {
       product_id: '11',
       product_name: 'Malbec Strong',
-      product_price: '210,00',
+      product_price: 210.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'oBoticário',
       product_categoria: 'Perfume'
@@ -65,7 +65,7 @@ export class ProdutosComponent {
     {
       product_id: '12',
       product_name: 'Kit Todo dia',
-      product_price: '75,00',
+      product_price: 75.00,
       product_description: 'Perfume feminino de alta fixação ideal para o dia.',
       product_marca: 'Natura',
       product_categoria: 'Kit'
