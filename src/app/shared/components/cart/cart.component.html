@@ -10,9 +10,36 @@
     }
   </ul>
 
+  <mat-form-field>
+    <mat-label>Formas de pagamento</mat-label>
+    <mat-select [(value)]="pay">
+      @for (pagamento of pagamentos; track pagamento) {
+      <mat-option value="{{pagamento}}">{{pagamento}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (pay == 'Cartão') {
+  <mat-form-field>
+    <mat-label>Parcelas</mat-label>
+    <mat-select [(value)]="parcela">
+      @for (parcela of parcelas; track parcela) {
+      <mat-option value="{{parcela}}">{{parcela}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  }
+
+  <span>Forma de pagamento: {{pay}}</span>
+  @if (pay == 'Cartão') {
+  <span>Qtd de parcelas: {{parcela}}</span>
+  <span>Valor de cada parcela {{ calcularParcelas()| currency : 'BRL'}}</span>
+  }
   <span>Total {{ calcularCarrinho()| currency : 'BRL'}}</span>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial (click)="finalizarPedido()">Finalizar
+    pedido</button>
 </mat-dialog-actions>

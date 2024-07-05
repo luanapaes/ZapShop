@@ -5,17 +5,37 @@ import { CarrinhoService } from '../../services/CarrinhoService.service';
 import { Produto } from '../../interfaces/produto.interface';
 import { CurrencyPipe } from '@angular/common';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, CurrencyPipe],
+  imports: [MatButtonModule, MatDialogModule, 
+    CurrencyPipe, MatFormFieldModule, 
+    MatSelectModule, MatInputModule
+  ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
   constructor(public dialog: MatDialog) { 
   }
+
+  pagamentos: string[] = [
+    'Dinheiro',
+    'Pix',
+    'Cartão',
+  ];
+
+  pay = '';
+
+  parcelas: number[] = [1, 2, 3, 4, 5, 6];
+
+  parcela = 0;
+
   produtosCarrinho: Produto[] = [];
 
   carrinho = inject(CarrinhoService);
@@ -40,12 +60,36 @@ export class CartComponent {
 
   calcularCarrinho() {
     const valoresProdutos = this.produtosCarrinho.map((prod) => {
-      return parseFloat(prod.product_price);
+      return prod.product_price;
     });
     
     const total = valoresProdutos.reduce((acc, curr) => acc + curr, 0);
-
+    
     return total;
+  }
+
+  calcularParcelas(){
+    return this.calcularCarrinho()/this.parcela;
+  }
+
+  finalizarPedido(){
+    if(this.produtosCarrinho.length > 0){
+      let mensagem = `Olá! Escolhi alguns produtos através do catálogo e desejo finalizar a compra! 😊\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') })
+        }.\nPreço total da compra: R$${this.calcularCarrinho().toFixed(2)}.`;
+
+      if (this.parcela) {
+        const valorParcela = this.calcularParcelas();
+        mensagem += `\nForma de pagamento: ${this.pay}. \nParcelado em ${this.parcela}x de R$${valorParcela.toFixed(2)}.`;
+      }
+
+      const numeroWhatsApp = "558185624853";
+
+      const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
+
+      window.open(urlWhatsApp, "_blank");
+    }else{
+      console.log('sem produtos')
+    }
   }
 }
 
