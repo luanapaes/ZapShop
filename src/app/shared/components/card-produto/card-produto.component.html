@@ -10,7 +10,7 @@
             <span>{{ productMarca }}</span>
             <span>{{ productCategory }}</span>
         </div>
-        <p>R$ {{ productPrice }}</p>
+        <p>R$ {{ productPrice | currency : 'BRL' }}</p>
     </div>
 
     <app-button-add-to-bag [productCart]="product"></app-button-add-to-bag>

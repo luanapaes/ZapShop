@@ -1,18 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { ButtonAddToBagComponent } from '../button-add-to-bag/button-add-to-bag.component';
 import { Produto } from '../../interfaces/produto.interface';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-card-produto',
   standalone: true,
-  imports: [ButtonAddToBagComponent],
+  imports: [ButtonAddToBagComponent, CurrencyPipe],
   templateUrl: './card-produto.component.html',
   styleUrl: './card-produto.component.scss'
 })
 export class CardProdutoComponent {
   @Input() productId: string = '';
   @Input() productName: string = '';
-  @Input() productPrice: string = '';
+  @Input() productPrice: number = 0;
   @Input() productDescription: string = '';
   @Input() productCategory: string = '';
   @Input() productMarca: string = '';
