@@ -5,13 +5,22 @@
             @if (isHome) {
                 <li><a routerLink="">Home</a></li>
             }
+            @if (!isHome) {
             <li><a routerLink="/produtos">Produtos</a></li>
+            }
             @if (isHome) {
              <li>
                 <button class="btn-cart" (click)="openCart()"><i class="fas fa-cart-plus"></i></button>
              </li>
             }
-            <li><a><i class="far fa-user"></i></a></li>
+            @if (isHome) {
+            <li>
+                <button class="opcoes" mat-button [matMenuTriggerFor]="menu"><i class="far fa-user"></i></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="goToAddProdutos()">Adicionar produto</button>
+                </mat-menu>
+            </li>
+            }
         </ul>
 
     </div>
