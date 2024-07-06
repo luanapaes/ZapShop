@@ -1,0 +1,42 @@
+<div class="form-container">
+    <form [formGroup]="myProductForm" (submit)="onSubmit()">
+        <label>
+            Id
+            <input type="text" formControlName="product_id" placeholder="id do produto.." required="true">
+        </label>
+    
+        <label>
+            Nome do produto
+            <input type="text" formControlName="product_name" placeholder="nome do produto" required="true">
+        </label>
+    
+        <label>
+            Preço do produto
+            <input type="text" formControlName="product_price" placeholder="preço do produto" required="true">
+        </label>
+    
+        <label>
+            Descrição
+            <input type="text" formControlName="product_description" placeholder="descrição do produto" required="true">
+        </label>
+    
+        <label>
+            Marca do produto
+            <input type="text" formControlName="product_marca" placeholder="marca do produto" required="true">
+        </label>
+    
+        <label>
+            Categoria
+            <mat-form-field>
+                <mat-label>escolha..</mat-label>
+                <mat-select [(value)]="categoria">
+                    @for (categoria of categorias; track categoria) {
+                    <mat-option value="{{categoria}}">{{categoria}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </label>
+
+        <button type="submit">Cadastrar produto</button>
+    </form>
+</div>
