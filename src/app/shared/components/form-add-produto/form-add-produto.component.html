@@ -28,10 +28,18 @@
         <label>
             Categoria
             <mat-form-field>
-                <mat-label>escolha..</mat-label>
-                <mat-select [(value)]="categoria">
-                    @for (categoria of categorias; track categoria) {
-                    <mat-option value="{{categoria}}">{{categoria}}</mat-option>
+                <mat-label>Toppings</mat-label>
+                <mat-select [formControl]="myProductForm.controls.product_categoria" multiple>
+                    <mat-select-trigger>
+                        {{myProductForm.controls.product_categoria.value?.[0] || ''}}
+                        @if ((myProductForm.controls.product_categoria.value?.length || 0) > 1) {
+                        <span class="example-additional-selection">
+                            (+{{(myProductForm.controls.product_categoria.value?.length || 0) - 1}} {{myProductForm.controls.product_categoria.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                        }
+                    </mat-select-trigger>
+                    @for (categoria of categoriasList; track categoria) {
+                    <mat-option [value]="categoria">{{categoria}}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>

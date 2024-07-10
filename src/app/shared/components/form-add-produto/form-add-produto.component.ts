@@ -3,8 +3,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Categoria } from '../../interfaces/categoria.interface';
 import { ProdutosService } from '../../services/ProdutosService.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-add-produto',
@@ -15,7 +15,8 @@ import { ProdutosService } from '../../services/ProdutosService.service';
   styleUrl: './form-add-produto.component.scss'
 })
 export class FormAddProdutoComponent {
-  produtosService = inject(ProdutosService)
+  produtosService = inject(ProdutosService);
+  router = inject(Router)
 
   myProductForm = new FormGroup({
     product_id: new FormControl(), 
@@ -26,10 +27,10 @@ export class FormAddProdutoComponent {
     product_categoria: new FormControl(),
   });
 
-  categorias: string[] = [
+
+  categoriasList: string[] = [
     'perfume', 'hidratante', 'kit'
   ]
-  categoria = '';
   
   onSubmit(){
     if(this.myProductForm.valid){
@@ -42,7 +43,8 @@ export class FormAddProdutoComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       )
-      console.log(this.produtosService.getProdutos())
+      console.log(this.myProductForm.value.product_categoria)
+      this.router.navigate(['produtos'])
     } else{
       console.log("Não enviado.")
     }
