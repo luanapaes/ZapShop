@@ -8,7 +8,7 @@ export class ProdutosService {
     private arrayProducts: Produto[] = [];
 
     addNewProduct(id: string, nomeProduto: string, 
-        precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string){
+        precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string[]){
         
         const produto: Produto = {
             product_id: id,

@@ -7,7 +7,7 @@ import { Produto } from '../interfaces/produto.interface';
 export class CarrinhoService {
     private produtosCarrinho: Produto[] = [];
 
-    addProductToBag(productId: string, productName: string, productPrice: number, productDescription: string, productMarca: string, productCartegory: string) {
+    addProductToBag(productId: string, productName: string, productPrice: number, productDescription: string, productMarca: string, productCartegory: string[]) {
         const product: Produto = {
             product_id: productId,
             product_name: productName,

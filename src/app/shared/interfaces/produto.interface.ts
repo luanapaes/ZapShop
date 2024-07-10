@@ -4,5 +4,5 @@ export interface Produto {
     product_price: number;
     product_description: string, 
     product_marca: string;
-    product_categoria: string
+    product_categoria: string[]
 }
