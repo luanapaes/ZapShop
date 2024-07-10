@@ -34,7 +34,6 @@ export class FormAddProdutoComponent {
   
   onSubmit(){
     if(this.myProductForm.valid){
-      console.log("Enviou")
       this.produtosService.addNewProduct(
         this.myProductForm.value.product_id,
         this.myProductForm.value.product_name,
@@ -43,7 +42,6 @@ export class FormAddProdutoComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       )
-      console.log(this.myProductForm.value.product_categoria)
       this.router.navigate(['produtos'])
     } else{
       console.log("Não enviado.")
