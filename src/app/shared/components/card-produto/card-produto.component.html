@@ -8,7 +8,9 @@
         <p>{{ productDescription }}</p>
         <div class="etiquetas">
             <span>{{ productMarca }}</span>
-            <span>{{ productCategory }}</span>
+            @for (categoria of product.product_categoria; track categoria) {
+              <span>{{ categoria }}</span>
+            }
         </div>
         <p>R$ {{ productPrice | currency : 'BRL' }}</p>
     </div>
