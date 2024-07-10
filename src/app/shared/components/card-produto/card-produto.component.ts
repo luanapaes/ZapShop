@@ -15,7 +15,7 @@ export class CardProdutoComponent {
   @Input() productName: string = '';
   @Input() productPrice: number = 0;
   @Input() productDescription: string = '';
-  @Input() productCategory: string = '';
+  @Input() productCategory: string[] = [];
   @Input() productMarca: string = '';
 
   product!: Produto;
