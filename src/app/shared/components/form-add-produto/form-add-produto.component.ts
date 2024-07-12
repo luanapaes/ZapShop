@@ -21,6 +21,7 @@ export class FormAddProdutoComponent {
   myProductForm = new FormGroup({
     product_id: new FormControl(), 
     product_name: new FormControl(),
+    product_image: new FormControl(),
     product_price: new FormControl(),
     product_marca: new FormControl(),
     product_description: new FormControl(),
@@ -37,6 +38,7 @@ export class FormAddProdutoComponent {
       this.produtosService.addNewProduct(
         this.myProductForm.value.product_id,
         this.myProductForm.value.product_name,
+        this.myProductForm.value.product_image,
         this.myProductForm.value.product_price,
         this.myProductForm.value.product_description,
         this.myProductForm.value.product_marca,

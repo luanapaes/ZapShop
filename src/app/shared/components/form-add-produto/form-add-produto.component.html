@@ -9,6 +9,11 @@
             Nome do produto
             <input type="text" formControlName="product_name" placeholder="nome do produto" required="true">
         </label>
+
+        <label>
+            Link da imagem do produto
+            <input type="text" formControlName="product_image" placeholder="link da imagem" required="true">
+        </label>
     
         <label>
             Preço do produto
@@ -17,7 +22,7 @@
     
         <label>
             Descrição
-            <input type="text" formControlName="product_description" placeholder="descrição do produto" required="true">
+            <input type="text" formControlName="product_description" placeholder="descrição do produto" required="true" maxlength="40">
         </label>
     
         <label>
