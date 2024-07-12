@@ -13,6 +13,7 @@ import { CurrencyPipe } from '@angular/common';
 export class CardProdutoComponent {
   @Input() productId: string = '';
   @Input() productName: string = '';
+  @Input() productImage: string = '';
   @Input() productPrice: number = 0;
   @Input() productDescription: string = '';
   @Input() productCategory: string[] = [];
@@ -26,10 +27,12 @@ export class CardProdutoComponent {
     this.product = {
       product_id: this.productId,
       product_name: this.productName,
+      product_image: this.productImage,
       product_price: this.productPrice,
       product_description: this.productDescription,
       product_marca: this.productMarca,
       product_categoria: this.productCategory
     }
+    console.log(this.product)
   }
 }

@@ -3,12 +3,18 @@
 
     <div class="content">
         <h1>Nossos Produtos</h1>
-        @if (produtos.length != 0) {
+        @if (produtos().length != 0) {
         <div class="cards">
-            @for (produto of produtos; track produto.product_id) {
-            <app-card-produto class="card-content" [productId]="produto.product_id" [productName]="produto.product_name"
-                [productDescription]="produto.product_description" [productPrice]="produto.product_price"
-                [productMarca]="produto.product_marca" [productCategory]="produto.product_categoria">
+            @for (produto of produtos(); track produto) {
+            <app-card-produto class="card-content" 
+                [productId]="produto.product_id" 
+                [productName]="produto.product_name"
+                [productImage]="produto.product_image"
+                [productDescription]="produto.product_description" 
+                [productPrice]="produto.product_price"
+                [productMarca]="produto.product_marca" 
+                [productCategory]="produto.product_categoria"
+            >
             </app-card-produto>
             }
         </div>

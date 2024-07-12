@@ -1,6 +1,6 @@
 <div class="card-product">
     <div class="card-image">
-        <img src="../../../../assets/produtos/floratta.jpg" alt="" width="300px">
+        <img src={{productImage}} alt="" width="300px">
     </div>
 
     <div class="card-info-product">
@@ -8,11 +8,9 @@
         <p>{{ productDescription }}</p>
         <div class="etiquetas">
             <span>{{ productMarca }}</span>
-            @for (categoria of product.product_categoria; track categoria) {
-              <span>{{ categoria }}</span>
-            }
+            <span>{{ productCategory }}</span>
         </div>
-        <p>R$ {{ productPrice | currency : 'BRL' }}</p>
+        <p class="price">{{ productPrice | currency : 'BRL' }}</p>
     </div>
 
     <app-button-add-to-bag [productCart]="product"></app-button-add-to-bag>

@@ -19,8 +19,9 @@ export class FormAddProdutoComponent {
   router = inject(Router)
 
   myProductForm = new FormGroup({
-    product_id: new FormControl(), 
+    product_id: new FormControl(),
     product_name: new FormControl(),
+    product_image: new FormControl(),
     product_price: new FormControl(),
     product_marca: new FormControl(),
     product_description: new FormControl(),
@@ -31,22 +32,24 @@ export class FormAddProdutoComponent {
   categoriasList: string[] = [
     'perfume', 'hidratante', 'kit'
   ]
-  
-  onSubmit(){
-    if(this.myProductForm.valid){
+
+  onSubmit() {
+    if (this.myProductForm.valid) {
       this.produtosService.addNewProduct(
         this.myProductForm.value.product_id,
         this.myProductForm.value.product_name,
+        this.myProductForm.value.product_image,
         this.myProductForm.value.product_price,
         this.myProductForm.value.product_description,
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
-      )
-      this.router.navigate(['produtos'])
-    } else{
+      ).subscribe(() => {
+        this.router.navigate(['produtos'])
+      })
+    } else {
       console.log("Não enviado.")
     }
   }
 
-  
+
 }

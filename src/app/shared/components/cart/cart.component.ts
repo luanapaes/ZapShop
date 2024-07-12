@@ -75,7 +75,7 @@ export class CartComponent {
   finalizarPedido(){
     if(this.produtosCarrinho.length > 0){
       let mensagem = `Olá! Escolhi alguns produtos através do catálogo e desejo finalizar a compra! 😊\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') })
-        }.\nPreço total da compra: R$${this.calcularCarrinho().toFixed(2)}.`;
+        }.\nPreço total da compra: R$${this.calcularCarrinho()}.`;
 
       if (this.parcela) {
         const valorParcela = this.calcularParcelas();
