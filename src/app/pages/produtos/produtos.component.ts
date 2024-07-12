@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { Produto } from '../../shared/interfaces/produto.interface';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { ProdutosService } from '../../shared/services/ProdutosService.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -13,14 +14,7 @@ import { ProdutosService } from '../../shared/services/ProdutosService.service';
   styleUrl: './produtos.component.scss'
 })
 export class ProdutosComponent {
-  produtosService = inject(ProdutosService)
-  produtos: Produto[] = []
-  
-  ngOnInit(): void {
-    this.carregarProdutos()
-  }
+  produtos = signal<Produto[]>(inject(ActivatedRoute).snapshot.data['produtos'])
 
-  carregarProdutos(){
-    this.produtos = this.produtosService.getProdutos()
-  }
+  
 }
