@@ -1,6 +1,7 @@
 .card-product {
-    min-height: 400px;
-    height: auto;
+    min-height: 450px;
+    max-width: 300px;
+    height: 400px;
     width: 100%;
 
     border-radius: 5px;
@@ -16,7 +17,12 @@
         justify-content: center;
         height: 60%;
         width: 100%;
-        // background-image: url(../../../../assets/produtos/floratta.jpg);
+        
+        img{
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 5px 5px 0 0;
+        }
     }
 
     .card-info-product {
@@ -30,13 +36,21 @@
             text-transform: uppercase;
         }
 
+        p{
+            max-width: 300px;
+        }
+
+        .price{
+            margin-top: 10px;
+        }
+
         padding: 0 8px;
 
         .etiquetas {
             color: #094D2C;
             width: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
 
             span {
                 border: 1px solid #094D2C;
