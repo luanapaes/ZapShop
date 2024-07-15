@@ -4,7 +4,6 @@
   <ul>
     @for (produto of produtosCarrinho; track produto.product_id) {
     <li>
-      <i class="fas fa-trash-alt" (click)="removerProduto()"></i>
       <h2>{{ produto.product_name }}</h2>
       <p>{{ produto.product_description }}</p>
       <p>R${{ produto.product_price }}</p>

@@ -27,10 +27,6 @@ export class CarrinhoService {
         return this.produtosCarrinho;
     }
 
-    delete(id: string): Produto | undefined {
-        return this.produtosCarrinho.find(produto => produto.product_name === id);
-    }
-
     // delete(name: string): void {
     //     this.produtosCarrinho = this.produtosCarrinho.filter(produto => produto.product_name !== name);
     // }

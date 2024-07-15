@@ -106,16 +106,7 @@ export class CartComponent {
     }
   }
 
-  removerProduto(){
-    console.log(this.produtosCarrinho, "olaaaa")
-    let productName = this.produtosCarrinho.map((prod) =>{
-      return prod.product_name
-    })
 
-    this.carrinho.delete(productName.toString())
-
-    console.log(productName)
-  }
 }
 
 function Output(): (target: CartComponent, propertyKey: "openEvent") => void {
