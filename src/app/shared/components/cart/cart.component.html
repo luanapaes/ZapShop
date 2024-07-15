@@ -2,18 +2,22 @@
 @if (produtosCarrinho.length != 0) {
 <mat-dialog-content class="mat-typography">
   <ul>
-    @for (produto of produtosCarrinho; track $index) {
+    @for (produto of produtosCarrinho; track produto.product_id) {
     <li>
+      <i class="fas fa-trash-alt" (click)="removerProduto()"></i>
       <h2>{{ produto.product_name }}</h2>
       <p>{{ produto.product_description }}</p>
       <p>R${{ produto.product_price }}</p>
+      <label>Quantidade
+        <input type="text" [(ngModel)]="produto.qtd_product">
+      </label>
     </li>
     }
   </ul>
 
   <mat-form-field>
     <mat-label>Formas de pagamento</mat-label>
-    <mat-select [(value)]="pay">
+    <mat-select [(value)]="pay" required="true">
       @for (pagamento of pagamentos; track pagamento) {
       <mat-option value="{{pagamento}}">{{pagamento}}</mat-option>
       }

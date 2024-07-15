@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject } from '@angular/core';
+import { Component, EventEmitter, inject, signal } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CarrinhoService } from '../../services/CarrinhoService.service';
@@ -8,20 +8,23 @@ import { CurrencyPipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { CartProduct } from '../../interfaces/cart-product.interface';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, 
-    CurrencyPipe, MatFormFieldModule, 
-    MatSelectModule, MatInputModule
+  imports: [MatButtonModule, MatDialogModule,
+    CurrencyPipe, MatFormFieldModule,
+    MatSelectModule, MatInputModule,
+    FormsModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog) {
   }
 
   pagamentos: string[] = [
@@ -36,13 +39,20 @@ export class CartComponent {
 
   parcela = 0;
 
-  produtosCarrinho: Produto[] = [];
+  total = signal(0)
+
+  produtosCarrinho: CartProduct[] = [];
 
   carrinho = inject(CarrinhoService);
 
   ngOnInit(): void {
     this.carregarProdutos()
-    
+
+    this.produtosCarrinho.forEach(produto => {
+      if (!produto.qtd_product) {
+        produto.qtd_product = 1;
+      }
+    });
   }
 
   openDialog() {
@@ -53,29 +63,33 @@ export class CartComponent {
     });
   }
 
-  carregarProdutos(){
+  carregarProdutos() {
     this.produtosCarrinho = this.carrinho.getProdutosCarrinho()
     console.log(this.produtosCarrinho)
   }
 
   calcularCarrinho() {
     const valoresProdutos = this.produtosCarrinho.map((prod) => {
-      return prod.product_price;
+      return prod.product_price * prod.qtd_product;
     });
-    
-    const total = valoresProdutos.reduce((acc, curr) => acc + curr, 0);
-    
-    return total;
+
+    let totalCompra = this.total();
+
+    for (let i = 0; i < valoresProdutos.length; i++) {
+      let valores = Number(valoresProdutos[i])
+      totalCompra += valores;
+    }
+    return totalCompra
   }
 
-  calcularParcelas(){
-    return this.calcularCarrinho()/this.parcela;
+  calcularParcelas() {
+    return this.calcularCarrinho() / this.parcela;
   }
 
-  finalizarPedido(){
-    if(this.produtosCarrinho.length > 0){
-      let mensagem = `Olá! Escolhi alguns produtos através do catálogo e desejo finalizar a compra! 😊\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') })
-        }.\nPreço total da compra: R$${this.calcularCarrinho()}.`;
+  finalizarPedido() {
+    if (this.produtosCarrinho.length > 0) {
+      let mensagem = `Olá! Escolhi alguns produtos através do catálogo e desejo finalizar a compra! 😊\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') + " - " + prod.qtd_product + " " + "uni"})
+        }. \nPreço total da compra: R$${this.calcularCarrinho()}.`;
 
       if (this.parcela) {
         const valorParcela = this.calcularParcelas();
@@ -87,9 +101,20 @@ export class CartComponent {
       const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
 
       window.open(urlWhatsApp, "_blank");
-    }else{
+    } else {
       console.log('sem produtos')
     }
+  }
+
+  removerProduto(){
+    console.log(this.produtosCarrinho, "olaaaa")
+    let productName = this.produtosCarrinho.map((prod) =>{
+      return prod.product_name
+    })
+
+    this.carrinho.delete(productName.toString())
+
+    console.log(productName)
   }
 }
 
