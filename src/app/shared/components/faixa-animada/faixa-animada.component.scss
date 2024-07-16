@@ -4,7 +4,7 @@
     overflow: hidden;
     background-color: #094D2C;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px 0 0;
     position: relative;
     display: flex;
 }
@@ -14,20 +14,21 @@
     display: inline-block;
     white-space: nowrap;
     position: absolute;
-    animation: marquee 40s linear infinite;
+    animation: marquee 40s backwards normal;
 
     p{
         color:#F0FFF8;
+        margin: 0;
     }
 }
 
 @keyframes marquee {
     from {
-        transform: translateX(50%);
+        transform: translateX(30%);
     }
 
     to {
-        transform: translateX(-100%);
+        transform: translateX(-99%);
     }
 }
 
