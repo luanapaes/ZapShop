@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Preencha com seus dados</h2>
 <mat-dialog-content class="mat-typography">
     <mat-stepper #stepper>
         <mat-step [stepControl]="firstFormGroup">
@@ -16,6 +16,7 @@
         <mat-step [stepControl]="secondFormGroup" label="Informe seu endereço">
             <form [formGroup]="secondFormGroup">
                 <p>Por gentileza, informe o CEP, bairro, nome da rua, número da casa e um ponto de referência.</p>
+                <p>Exemplo: Rua Recife, 487, Recife - Marco Zero</p>
                 <mat-form-field>
                     <mat-label>Seu endereço</mat-label>
                     <input matInput formControlName="secondCtrl" placeholder="seu endereço" required>
@@ -29,9 +30,9 @@
         <mat-step>
             <ng-template matStepLabel>Salvar</ng-template>
             <p>Tudo pronto! Acesse o carrinho.</p>
+            <p><strong>Obs: </strong>antes de enviar seu pedido, por favor, verifique se todas as suas informações estão corretas.</p>
             <div>
                 <button mat-button matStepperPrevious>Voltar</button>
-                <button mat-button (click)="stepper.reset()">Apagar tudo</button>
             </div>
         </mat-step>
     </mat-stepper>

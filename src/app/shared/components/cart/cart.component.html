@@ -34,6 +34,11 @@
   </mat-form-field>
   }
 
+  <mat-radio-group [(ngModel)]="entrega" aria-label="Entregar produto na sua casa?">
+    <mat-radio-button value="1">Sim</mat-radio-button>
+    <mat-radio-button value="0">Não</mat-radio-button>
+  </mat-radio-group>
+
   <span>Forma de pagamento: {{pay}}</span>
   @if (pay == 'Cartão') {
   <span>Qtd de parcelas: {{parcela}}</span>
@@ -41,6 +46,7 @@
   }
   <span>Total {{ calcularCarrinho()| currency : 'BRL'}}</span>
 </mat-dialog-content>
+
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancelar</button>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, inject, signal } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CarrinhoService } from '../../services/CarrinhoService.service';
-import { Produto } from '../../interfaces/produto.interface';
 import { CurrencyPipe } from '@angular/common';
 
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CartProduct } from '../../interfaces/cart-product.interface';
 
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +18,7 @@ import { CartProduct } from '../../interfaces/cart-product.interface';
   imports: [MatButtonModule, MatDialogModule,
     CurrencyPipe, MatFormFieldModule,
     MatSelectModule, MatInputModule,
-    FormsModule
+    FormsModule, MatRadioModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
@@ -26,7 +26,7 @@ import { CartProduct } from '../../interfaces/cart-product.interface';
 export class CartComponent {
   constructor(public dialog: MatDialog) {
   }
-
+  
   pagamentos: string[] = [
     'Dinheiro',
     'Pix',
@@ -40,6 +40,11 @@ export class CartComponent {
   parcela = 0;
 
   total = signal(0)
+
+  entrega: number = 0
+  
+  usernameLocalStorage = JSON.parse(localStorage.getItem('firstFormGroup') || '{}');
+  userAdressLocalStorage = JSON.parse(localStorage.getItem('secondFormGroup') || '{}');
 
   produtosCarrinho: CartProduct[] = [];
 
@@ -88,12 +93,16 @@ export class CartComponent {
 
   finalizarPedido() {
     if (this.produtosCarrinho.length > 0) {
-      let mensagem = `Olá! Escolhi alguns produtos através do catálogo e desejo finalizar a compra! 😊\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') + " - " + prod.qtd_product + " " + "uni"})
-        }. \nPreço total da compra: R$${this.calcularCarrinho()}.`;
+      let mensagem = `Olá, me chamo ${this.usernameLocalStorage.firstCtrl}! Selecionei alguns produtos do catálogo e gostaria de finalizar a compra. 😊\n\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') + " - " + prod.qtd_product + " " + "uni"})
+        }.\nPreço total da compra: R$${this.calcularCarrinho().toFixed(2)}.`;
 
       if (this.parcela) {
         const valorParcela = this.calcularParcelas();
         mensagem += `\nForma de pagamento: ${this.pay}. \nParcelado em ${this.parcela}x de R$${valorParcela.toFixed(2)}.`;
+      }
+
+      if(this.entrega == 1){
+        mensagem += `\nDesejo receber o produto no seguinte endereço: ${this.userAdressLocalStorage.secondCtrl}`
       }
 
       const numeroWhatsApp = "558185624853";
