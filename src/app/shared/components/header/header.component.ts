@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   @Input() isHome: boolean = true;
+  
   constructor(public dialog: MatDialog, private router: Router) { }
 
   openCart() {
@@ -26,5 +28,21 @@ export class HeaderComponent {
 
   goToAddProdutos(){
     this.router.navigate(['cadastrar-produto'])
+  }
+
+  openUserDialog(){
+    const dialogRef = this.dialog.open(UserDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  open(){
+    if(localStorage.length > 0){
+      this.openCart()
+    }else{
+      this.openUserDialog()
+    }
   }
 }
