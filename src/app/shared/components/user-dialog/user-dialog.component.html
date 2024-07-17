@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Informe seu nome</ng-template>
+                <mat-form-field>
+                    <mat-label>Nome e sobrenome</mat-label>
+                    <input matInput placeholder="nome e sobrenome.." formControlName="firstCtrl" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Próximo</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" label="Informe seu endereço">
+            <form [formGroup]="secondFormGroup">
+                <p>Por gentileza, informe o CEP, bairro, nome da rua, número da casa e um ponto de referência.</p>
+                <mat-form-field>
+                    <mat-label>Seu endereço</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="seu endereço" required>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperPrevious>Voltar</button>
+                    <button mat-button matStepperNext (click)="verificar()">Próximo</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Salvar</ng-template>
+            <p>Tudo pronto! Acesse o carrinho.</p>
+            <div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button (click)="stepper.reset()">Apagar tudo</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial disabled={{disabled}} (click)="save()">Salvar</button>
+</mat-dialog-actions>
