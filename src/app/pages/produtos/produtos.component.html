@@ -2,7 +2,14 @@
     <app-header></app-header>
 
     <div class="content">
-        <h1>Nossos Produtos</h1>
+        <div class="welcome">
+            <h1>Bem-vindo(a) ao nosso catálogo de cosméticos!</h1>
+            <p>Aqui, você encontrará produtos selecionados para realçar a sua beleza e cuidar da sua pele com carinho. Explore
+                nossas
+                opções e descubra como nossos cosméticos podem fazer a diferença na sua rotina de cuidados. Aproveite as ofertas
+                exclusivas e permita-se brilhar ainda mais!</p>
+        </div>
+
         @if (produtos().length != 0) {
         <div class="cards">
             @for (produto of produtos(); track produto) {

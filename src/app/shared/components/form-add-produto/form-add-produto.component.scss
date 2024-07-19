@@ -9,10 +9,10 @@
         flex-direction: column;
         align-items: center;
         width: 40%;
-        color: #094D2C;
+        color: #CF8C95;
 
         box-shadow: -1px -1px 40px -40px rgba(18, 54, 21, 1);
-        border: 1px solid grey;
+        border: 1px solid #D9A3AC;
         padding: 20px 0;
         margin-bottom: 40px;
 
@@ -47,14 +47,14 @@
     }
 
     button {
-        width: 40%;
-        background-color: #094D2C;
-        color: #F0FFF8;
-        border-radius: 25px;
-        border: none;
+        background: #fff;
+        border: 1px solid #D9A3AC;
+        color: #CF8C95;
+        font-weight: bold;
+        border-radius: 5px;
         padding: 8px 10px;
 
-        margin-top: 10px;
+        margin-bottom: 10px;
         transition: all .4s ease-in;
     }
 

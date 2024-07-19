@@ -5,8 +5,8 @@
     width: 100%;
 
     border-radius: 5px;
-    border: 1px solid rgba(18, 54, 21, 1);
-    box-shadow: -1px -8px 40px -30px rgba(18, 54, 21, 1);
+    border: 1px solid #5a5e61a5;
+    box-shadow: #CF8C95 0px 2px 2px 0px;
 
     display: flex;
     flex-direction: column;
@@ -26,13 +26,17 @@
     }
 
     .card-info-product {
+        width: 100%;
+        padding-left: 15px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
 
         h2 {
+            color: #5A5E61;
             margin: 0;
+            margin-top: 8px;
             text-transform: uppercase;
         }
 
@@ -42,26 +46,20 @@
 
         .price{
             margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: 500;
         }
-
-        padding: 0 8px;
 
         .etiquetas {
             color: #094D2C;
             width: 100%;
-            display: flex;
-            justify-content: space-evenly;
 
             span {
-                border: 1px solid #094D2C;
-                border-radius: 25px;
+                border-bottom: 1px solid #094D2C;
+                margin: 0 2px;
                 padding: 3px 5px;
-                transition: background-color .3s ease-out;
             }
 
-            span:hover {
-                background-color: #F0FFF8;
-            }
         }
     }
 }

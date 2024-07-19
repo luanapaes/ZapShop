@@ -30,19 +30,15 @@ body {
 }
 
 .conheca {
-    height: 300px;
-    color: #094D2C;
+    height: 250px;
+    color: #5A5E61;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    h1 {
-        color: #107242;
-    }
-
     p {
-        font-size: 1.11em;
+        font-size: 1.15em;
         margin: 0 auto;
         width: 90%;
     }
@@ -52,7 +48,9 @@ body {
     padding: 0 2%;
 
     h2 {
+        font-weight: 400;
         text-align: center;
         font-size: 2em;
+        margin-bottom: 20px;
     }
 }
