@@ -33,6 +33,5 @@ export class CardProdutoComponent {
       product_marca: this.productMarca,
       product_categoria: this.productCategory
     }
-    console.log(this.product)
   }
 }
