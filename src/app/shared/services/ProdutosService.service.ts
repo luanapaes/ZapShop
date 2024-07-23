@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root'
 })
 export class ProdutosService {
-    httpClient = inject(HttpClient)
+    httpClient = inject(HttpClient);
+
+    apiUrl:string = 'http://localhost:3000/produtos'
 
     // addNewProduct(id: string, nomeProduto: string, productImage: string,
     //     precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string[]){
@@ -37,10 +39,11 @@ export class ProdutosService {
             product_categoria: categoriaProduto
         }
 
-        return this.httpClient.post<Produto>('http://localhost:3000/produtos', produto)
+        return this.httpClient.post<Produto>(this.apiUrl, produto)
     }
 
     getProdutos() {
-        return this.httpClient.get<Produto[]>('http://localhost:3000/produtos')
+        return this.httpClient.get<Produto[]>(this.apiUrl)
     }
+
 }
