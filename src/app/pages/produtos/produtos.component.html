@@ -10,6 +10,10 @@
                 exclusivas e permita-se brilhar ainda mais!</p>
         </div>
 
+        <div class="filtros">
+            <app-filtros></app-filtros>
+        </div>
+
         @if (produtos().length != 0) {
         <div class="cards">
             @for (produto of produtos(); track produto) {
