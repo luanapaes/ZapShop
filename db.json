@@ -110,6 +110,18 @@
       "product_categoria": [
         "perfume"
       ]
+    },
+    {
+      "id": "7d9e",
+      "product_id": "80",
+      "product_name": "Joli",
+      "product_image": "https://http2.mlstatic.com/D_NQ_NP_984092-MLB50113027265_052022-O.webp",
+      "product_price": "67.50",
+      "product_description": "Creme em óleo corporal",
+      "product_marca": "Hinode",
+      "product_categoria": [
+        "hidratante"
+      ]
     }
   ]
 }

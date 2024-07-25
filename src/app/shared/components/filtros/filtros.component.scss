@@ -1,13 +1,17 @@
 .filter-container{
-    width: 500px;
+    width: auto;
     display: flex;
     flex-direction: row;
 
     .filter{
-        width: 90%;
+        width: auto;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        flex-wrap: wrap;
+       
+
+        mat-form-field{
+            margin-right: 8px;
+        }
     }
 }

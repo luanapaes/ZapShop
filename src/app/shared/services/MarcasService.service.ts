@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Marca } from '../interfaces/marca.interface';
 import { Produto } from '../interfaces/produto.interface';
 
@@ -9,7 +9,9 @@ import { Produto } from '../interfaces/produto.interface';
 export class MarcasService {
     httpClient = inject(HttpClient);
     urlMarcasApi: string = 'http://localhost:3000/marcas';
-    urlProdutosApi: string = 'http://localhost:3000/produtos'
+    urlProdutosApi: string = 'http://localhost:3000/produtos';
+
+    marcaSelecionada = signal<string>('');
 
     //carrega todas as marcas
     get(){
@@ -17,12 +19,19 @@ export class MarcasService {
     }
 
     //carrega produtos de uma marca específica
-    getMarca(marca: string){
+    getProdutosDaMarca(marca: string){
         return this.httpClient.get<Marca[]>(`${this.urlMarcasApi}/${marca}`)
     }
 
-    //carrega produtos filtrados de marca e categoria específica
-    getProdutosFiltrados(marca: string, categoria: string){
-        return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?product_marca=${marca}&&product_categoria=${categoria}`)
+    getProdutosFiltrados(marca: string) {
+        return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?product_marca=${marca}`);
+    }
+
+    getMarca(): string{
+        return this.marcaSelecionada();
+    }
+
+    setMarca(marca: string){
+        this.marcaSelecionada.set(marca)
     }
 }

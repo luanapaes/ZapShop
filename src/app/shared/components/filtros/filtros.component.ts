@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Output, Signal, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MarcasService } from '../../services/MarcasService.service';
@@ -15,16 +15,6 @@ import { Produto } from '../../interfaces/produto.interface';
   styleUrl: './filtros.component.scss'
 })
 export class FiltrosComponent {
-  constructor(){
-
-    //monitora mudança nas propriedades e chama a função
-    effect(() => {
-      const marca = this.selectedMarca();
-      const categoria = this.selectedCategoria();
-      this.filtrarProdutos(marca, categoria);
-    })
-  }
-  
   marcas: Marca[] = [];
   marcasServices = inject(MarcasService);
   produtosServices = inject(ProdutosService);
@@ -33,17 +23,17 @@ export class FiltrosComponent {
 
   produtosFiltrados: Produto[] = [];
 
-  selectedMarca = signal<string>('');
-  selectedCategoria = signal<string>('');
+  selectedMarca: Signal<string> = signal<string>('');
 
   ngOnInit(): void {
     this.carregarMarcas()
   }
 
   ngAfterContentInit(): void {
-    this.carregarCategoriasDaMarca()
+    this.carregarProdutosDaMarca()
   }
 
+  //carrega todas as marcas para ficarem visíveis no select
   carregarMarcas() {
     this.marcasServices.get().subscribe(
       (marca: Marca[]) => {
@@ -52,19 +42,16 @@ export class FiltrosComponent {
     )
   }
 
-  carregarCategoriasDaMarca() {
-    this.marcasServices.getMarca(this.selectedMarca()).subscribe(
+  //carrega os produtos da marca selecionada no select
+  carregarProdutosDaMarca() {
+    this.marcasServices.getProdutosDaMarca(this.selectedMarca()).subscribe(
       (categorias: Marca[]) => {
         this.categoriasDaMarcaSelecionada = categorias
       }
     )
   }
 
-  filtrarProdutos(marca: string, categoria: string) {
-    this.marcasServices.getProdutosFiltrados(marca, categoria).subscribe(
-      (produtos: Produto[]) => {
-        this.produtosFiltrados = produtos;
-      }
-    )
-  }
+  // setMarca(marca: string){
+  //   return this.marcasServices.setMarca(marca)
+  // }
 }
