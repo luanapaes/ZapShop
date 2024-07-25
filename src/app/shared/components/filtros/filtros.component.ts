@@ -51,7 +51,8 @@ export class FiltrosComponent {
     )
   }
 
-  // setMarca(marca: string){
-  //   return this.marcasServices.setMarca(marca)
-  // }
+  //utilizado para informar mudança de marca
+  setMarca(marca: string){
+    return this.marcasServices.setMarca(marca)
+  }
 }
