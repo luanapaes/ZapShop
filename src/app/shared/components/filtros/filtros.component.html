@@ -2,22 +2,11 @@
     <div class="filter">
         <mat-form-field>
             <mat-label>Marca</mat-label>
-            <mat-select disableRipple matNativeControl [(ngModel)]="selectedMarca">
+            <mat-select disableRipple matNativeControl [(ngModel)]="selectedMarca" (selectionChange)="setMarca(selectedMarca())">
                 @for (marca of marcas; track marca) {
                     <mat-option [value]="marca.nome_marca">{{ marca.nome_marca }}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-
-        @if (selectedMarca()) {
-        <mat-form-field>
-            <mat-label>Categoria</mat-label>
-            <mat-select disableRipple matNativeControl [(ngModel)]="selectedCategoria">
-               @for (categoria of categoriasDaMarcaSelecionada; track $index) {
-                <mat-option [value]="categoria.categorias[$index]">{{ categoria.categorias[$index] }}</mat-option>
-               }
-            </mat-select>
-        </mat-form-field>
-        }
     </div>
 </div>
