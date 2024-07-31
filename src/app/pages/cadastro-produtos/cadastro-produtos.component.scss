@@ -1,9 +1,32 @@
-.create-container{
+.create-container {
     display: flex;
     flex-direction: column;
     height: 100%;
 
-    h1{
-        text-align: center;
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .btn-back {
+            margin-left: 60px;
+        }
+
+        h1 {
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .create-container>div {
+        .btn-back {
+            margin-left: 10px;
+        }
+
+        h1 {
+            margin-left: 20px;
+        }
     }
 }
