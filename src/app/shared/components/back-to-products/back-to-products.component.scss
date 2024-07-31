@@ -1,0 +1,22 @@
+a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid #5A5E61;
+    border-radius: 2px;
+    width: 60px;
+
+    padding: 2px;
+
+    transition: background-color .4s ease-out;
+
+    i {
+        font-size: 1.4em;
+        color: #5A5E61;
+    }
+
+    &:hover{
+        background-color: #ECECEC;
+    }
+}
