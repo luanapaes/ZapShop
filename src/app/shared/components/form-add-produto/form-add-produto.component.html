@@ -1,55 +1,63 @@
 <div class="form-container">
+
     <form [formGroup]="myProductForm" (submit)="onSubmit()">
-        <label>
-            Id
-            <input type="text" formControlName="product_id" placeholder="id do produto.." required="true">
-        </label>
-    
-        <label>
-            Nome do produto
-            <input type="text" formControlName="product_name" placeholder="nome do produto" required="true">
-        </label>
+        <div class="view-image">
+            <img [src]="imageSrc" alt="Selecione uma imagem" class="card-img" id="uploaded-image" src="#">
+            <div class="card-body">
+                <input type="file" accept="image/*" formControlName="product_image" required="true" (change)="onFileSelected($event)"
+                    class="form-control" id="upload-input">
+            </div>
+        </div>
 
-        <label>
-            Link da imagem do produto
-            <input type="text" formControlName="product_image" placeholder="link da imagem" required="true">
-        </label>
-    
-        <label>
-            Preço do produto
-            <input type="text" formControlName="product_price" placeholder="preço do produto" required="true">
-        </label>
-    
-        <label>
-            Descrição
-            <input type="text" formControlName="product_description" placeholder="descrição do produto" required="true" maxlength="40">
-        </label>
-    
-        <label>
-            Marca do produto
-            <input type="text" formControlName="product_marca" placeholder="marca do produto" required="true">
-        </label>
-    
-        <label>
-            
-            <mat-form-field>
-                <mat-label>Categoria</mat-label>
-                <mat-select [formControl]="myProductForm.controls.product_categoria" multiple>
-                    <mat-select-trigger>
-                        {{myProductForm.controls.product_categoria.value?.[0] || ''}}
-                        @if ((myProductForm.controls.product_categoria.value?.length || 0) > 1) {
-                        <span class="example-additional-selection">
-                            (+{{(myProductForm.controls.product_categoria.value?.length || 0) - 1}} {{myProductForm.controls.product_categoria.value?.length === 2 ? 'other' : 'others'}})
-                        </span>
+        <div class="form-inputs">
+            <label>
+                Id
+                <input type="text" formControlName="product_id" placeholder="id do produto.." required="true">
+            </label>
+
+            <label>
+                Nome do produto
+                <input type="text" formControlName="product_name" placeholder="nome do produto" required="true">
+            </label>
+
+            <label>
+                Preço do produto
+                <input type="text" formControlName="product_price" placeholder="preço do produto" required="true">
+            </label>
+
+            <label>
+                Descrição
+                <input type="text" formControlName="product_description" placeholder="descrição do produto"
+                    required="true" maxlength="40">
+            </label>
+
+            <label>
+                Marca do produto
+                <input type="text" formControlName="product_marca" placeholder="marca do produto" required="true">
+            </label>
+
+            <label>
+                <mat-form-field>
+                    <mat-label>Categoria</mat-label>
+                    <mat-select [formControl]="myProductForm.controls.product_categoria" multiple>
+                        <mat-select-trigger>
+                            {{myProductForm.controls.product_categoria.value?.[0] || ''}}
+                            @if ((myProductForm.controls.product_categoria.value?.length || 0) > 1) {
+                            <span class="example-additional-selection">
+                                (+{{(myProductForm.controls.product_categoria.value?.length || 0) - 1}}
+                                {{myProductForm.controls.product_categoria.value?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                            }
+                        </mat-select-trigger>
+                        @for (categoria of categoriasList; track categoria) {
+                        <mat-option [value]="categoria">{{categoria}}</mat-option>
                         }
-                    </mat-select-trigger>
-                    @for (categoria of categoriasList; track categoria) {
-                    <mat-option [value]="categoria">{{categoria}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
-        </label>
+                    </mat-select>
+                </mat-form-field>
+            </label>
 
-        <button type="submit">Cadastrar produto</button>
+            <button type="submit">Cadastrar produto</button>
+        </div>
+
     </form>
 </div>

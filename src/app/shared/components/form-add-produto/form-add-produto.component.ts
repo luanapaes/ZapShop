@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, viewChild, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,6 +18,23 @@ export class FormAddProdutoComponent {
   produtosService = inject(ProdutosService);
   router = inject(Router)
 
+  imageSrc: string | ArrayBuffer | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string | ArrayBuffer;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
   myProductForm = new FormGroup({
     product_id: new FormControl(),
     product_name: new FormControl(),
@@ -27,7 +44,6 @@ export class FormAddProdutoComponent {
     product_description: new FormControl(),
     product_categoria: new FormControl(),
   });
-
 
   categoriasList: string[] = [
     'perfume', 'hidratante', 'kit'
@@ -50,6 +66,5 @@ export class FormAddProdutoComponent {
       console.log("Não enviado.")
     }
   }
-
 
 }
