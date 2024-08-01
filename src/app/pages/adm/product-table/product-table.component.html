@@ -1,0 +1,36 @@
+<div class="table-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Marca</th>
+                <th class="none">Categoria</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (produto of produtosArray; track produto.product_id) {
+            <tr>
+                <td>{{ produto.product_name }}</td>
+                <td>{{ produto.product_price | currency : 'BRL' }}</td>
+                <td>{{ produto.product_marca }}</td>
+                <td class="none">{{ produto.product_categoria }}</td>
+                <td class="btn-options">
+                    <span>
+                        <button (click)="deleteProduto(produto.product_id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </span>
+
+                    <span>
+                        <button>
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                    </span>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
