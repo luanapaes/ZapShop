@@ -30,6 +30,10 @@ export class HeaderComponent {
     this.router.navigate(['cadastrar-produto'])
   }
 
+  goToAdmPage(){
+    this.router.navigate(['area-adm'])
+  }
+
   openUserDialog(){
     const dialogRef = this.dialog.open(UserDialogComponent);
 
