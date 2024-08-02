@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProdutosService } from '../../../shared/services/ProdutosService.service';
 import { Produto } from '../../../shared/interfaces/produto.interface';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-table',
@@ -14,6 +15,8 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductTableComponent {
   produtosService = inject(ProdutosService)
   produtosArray: Produto[] = [];
+
+  router = inject(Router)
 
   ngOnInit(): void {
     this.carregarProdutos()
@@ -37,5 +40,10 @@ export class ProductTableComponent {
         console.error('Erro ao excluir o produto:', error);
       }
     );
+  }
+
+  onEdit(produto: Produto) {
+    console.log(produto)
+    this.router.navigate(['edit-product', produto.product_id])
   }
 }
