@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CadastroProdutosComponent } from './pages/cadastro-produtos/cadastro-produtos.component';
 import { getProdutos } from './shared/resolvers/getProdutos.resolver';
 import { AdmComponent } from './pages/adm/adm.component';
+import { getProduto } from './shared/resolvers/getProduto.resolver';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,16 @@ export const routes: Routes = [
     {
         path: 'area-adm',
         component: AdmComponent
+    },
+    {
+        path: 'edit-product/:id',
+        resolve: {
+            product: getProduto //função do file(resolvers/get-product)
+        },
+        loadComponent: () =>
+            import('./pages/adm/product-table/edit-product/edit-product.component').then(
+                (m) => m.EditProductComponent
+            ),
+
     }
 ];
