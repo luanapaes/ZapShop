@@ -31,6 +31,14 @@ export class ProdutosService {
         return this.httpClient.get<Produto[]>(this.apiUrl)
     }
 
+    getProdutoById(product_id: string){
+        return this.httpClient.get<Produto>(`${this.apiUrl}?product_id=${product_id}`)
+    }
+
+    editProduct(id: string, payload: Produto) {
+        return this.httpClient.put(`/api/products/${id}`, payload)
+    }
+
     deleteProductById(product_id: string): Observable<void> {
         return this.httpClient.delete<void>(`${this.apiUrl}?product_id=${product_id}`);
     }
