@@ -12,20 +12,40 @@
             justify-content: end;
 
             p,
-            a {
+            a,
+            button {
                 margin: 0 30px 0 0;
                 font-size: 1.2em;
             }
 
             a {
                 text-decoration: none;
-                color: #5A5E61;
-                border-bottom: 1px solid #5A5E61;
+                background: #fff;
+                border: 1px solid #D9A3AC;
+                color: #CF8C95;
+                padding: 3px;
+                text-align: center;
                 transition: all .4s ease-out;
 
                 &:hover {
                     background-color: #ECECEC;
                 }
+            }
+
+            button {
+                background: #fff;
+                border: 1px solid #D9A3AC;
+                color: #CF8C95;
+                font-weight: bold;
+                border-radius: 5px;
+                padding: 8px 10px;
+
+                margin-bottom: 10px;
+                transition: all .4s ease-in;
+            }
+
+            button:hover {
+                cursor: pointer;
             }
         }
     }
@@ -46,13 +66,15 @@
         div {
             width: 100%;
             flex-wrap: wrap;
-            justify-content: space-around !important; 
+            justify-content: space-around !important;
 
-            p, a{
+            p,
+            a,
+            button {
                 width: 40%;
             }
 
-            p{
+            p {
                 margin-bottom: 6px !important;
             }
         }

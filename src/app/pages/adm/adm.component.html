@@ -4,9 +4,9 @@
     <div class="info-contant">
         <div>
             <p>Produtos cadastrados: {{produtos.length}}</p>
-            <p>Marcas cadastradas: {{marcas.length}}</p>
             <a routerLink="/cadastrar-produto">Adicionar produto</a>
-            <a>Cadastrar marca</a>
+            <p>Marcas cadastradas: {{marcas.length}}</p>
+            <button (click)="openDialog()">Adicionar marca</button>
         </div>
     </div>
 
