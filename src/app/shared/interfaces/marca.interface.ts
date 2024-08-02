@@ -1,5 +1,5 @@
 export interface Marca {
     nome_marca: string;
-    categorias: ['perfume', 'hidratante', 'sabonete'],
+    categorias: string[] | string,
     logomarca: string
 }
