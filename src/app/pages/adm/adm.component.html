@@ -1,5 +1,14 @@
 <div class="adm-container">
-    <app-header></app-header>
+    <app-header class="header"></app-header>
+
+    <div class="info-contant">
+        <div>
+            <p>Produtos cadastrados: {{produtos.length}}</p>
+            <p>Marcas cadastradas: {{marcas.length}}</p>
+            <a routerLink="/cadastrar-produto">Adicionar produto</a>
+            <a>Cadastrar marca</a>
+        </div>
+    </div>
 
     <app-product-table></app-product-table>
 </div>
