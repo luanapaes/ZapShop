@@ -34,4 +34,14 @@ export class MarcasService {
     setMarca(marca: string){
         this.marcaSelecionada.set(marca)
     }
+
+    cadastrarMarca(marca: Marca){
+        const newMarca: Marca = {
+            nome_marca: marca.nome_marca,
+            categorias: marca.categorias,
+            logomarca: marca.logomarca
+        }
+
+        return this.httpClient.post<Marca>(this.urlMarcasApi,newMarca)
+    }
 }
