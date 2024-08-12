@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProdutosService } from '../../services/ProdutosService.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form-add-produto',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrl: './form-add-produto.component.scss'
 })
 export class FormAddProdutoComponent {
+  matSnackBar = inject(MatSnackBar)
   produtosService = inject(ProdutosService);
   router = inject(Router)
 
@@ -60,6 +62,7 @@ export class FormAddProdutoComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
+        this.matSnackBar.open("Produto cadastrado com sucesso!", "OK")
         this.router.navigate(['produtos'])
       })
     } else {

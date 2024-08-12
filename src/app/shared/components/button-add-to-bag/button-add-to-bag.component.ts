@@ -1,6 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { Produto } from '../../interfaces/produto.interface';
 import { CarrinhoService } from '../../services/CarrinhoService.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-button-add-to-bag',
@@ -12,8 +13,10 @@ import { CarrinhoService } from '../../services/CarrinhoService.service';
 export class ButtonAddToBagComponent {
   @Input() productCart!: Produto;
   carrinhoService = inject(CarrinhoService);
+  matSnackBar = inject(MatSnackBar)
 
   addProductToBag() {
+    this.matSnackBar.open("Produto adicionado ao carrinho", "OK")
     this.carrinhoService.addProductToBag(
       this.productCart.product_id, this.productCart.product_name, this.productCart.product_image,
       this.productCart.product_price, this.productCart.product_description, 
