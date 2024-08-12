@@ -52,7 +52,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial (click)="finalizarPedido()">Finalizar
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial (click)="finalizarPedido()" disabled={{!pay}}>Finalizar
     pedido</button>
 </mat-dialog-actions>
 }@else {
