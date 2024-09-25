@@ -5,11 +5,16 @@ import { CadastroProdutosComponent } from './pages/cadastro-produtos/cadastro-pr
 import { getProdutos } from './shared/resolvers/getProdutos.resolver';
 import { AdmComponent } from './pages/adm/adm.component';
 import { getProduto } from './shared/resolvers/getProduto.resolver';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: 'produtos',
