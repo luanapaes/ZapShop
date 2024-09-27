@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ProdutosService {
     httpClient = inject(HttpClient);
 
-    apiUrl:string = 'http://localhost:3000/produtos'
+    apiUrl = "/api/produtos";
 
     addNewProduct(id: string, nomeProduto: string, productImage: string,
         precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string[]) {

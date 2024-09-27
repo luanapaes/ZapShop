@@ -8,8 +8,8 @@ import { Produto } from '../interfaces/produto.interface';
 })
 export class MarcasService {
     httpClient = inject(HttpClient);
-    urlMarcasApi: string = 'http://localhost:3000/marcas';
-    urlProdutosApi: string = 'http://localhost:3000/produtos';
+    urlMarcasApi: string = '/api/marcas';
+    urlProdutosApi: string = '/api/produtos';
 
     marcaSelecionada = signal<string>('');
 
