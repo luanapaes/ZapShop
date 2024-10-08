@@ -1,7 +1,7 @@
 <div class="grid-container">
     @for (marca of marcas; track marca) {
         <div class="grid-item item{{ $index + 1 }}" 
-            [style.background-image]="'url(' + marca.logomarca + ')'"[attr.nome-marca]="marca.nome_marca">
+            [style.background-image]="'url(' + marca.logomarca +')'"[attr.nome-marca]="marca.nome_marca">
         </div>
     }
 </div>

@@ -1,0 +1,28 @@
+<div class="login-container">
+
+    <div class="form">
+        <h1>Faça Login</h1>
+        <p>Informe suas credenciais para acessar sua conta.</p>
+
+        <form [formGroup]="myLoginForm" (submit)="onSubmit()">
+            <label>E-mail
+                <input formControlName="email" type="email" placeholder="digite seu email.." autofocus>
+            </label>
+
+            <label>Senha
+                <input formControlName="password" type="password" placeholder="digite sua senha..">
+            </label>
+
+            <span>
+                <a href="">esqueceu sua senha?</a>
+            </span>
+
+            <input type="submit" value="Entrar" class="enter">
+        </form>
+    </div>
+
+    <div class="back">
+        <div class="image">
+        </div>
+    </div>
+</div>

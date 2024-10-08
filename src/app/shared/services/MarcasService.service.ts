@@ -2,14 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Marca } from '../interfaces/marca.interface';
 import { Produto } from '../interfaces/produto.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MarcasService {
     httpClient = inject(HttpClient);
-    urlMarcasApi: string = 'http://localhost:3000/marcas';
-    urlProdutosApi: string = 'http://localhost:3000/produtos';
+    urlMarcasApi: string = '/api/marcas';
+    urlProdutosApi: string = '/api/produtos';
 
     marcaSelecionada = signal<string>('');
 
@@ -18,6 +19,10 @@ export class MarcasService {
         return this.httpClient.get<Marca[]>(this.urlMarcasApi)
     }
 
+    // getMarca() {
+    //     return this.httpClient.get<Marca>(this.urlMarcasApi)
+    // }
+
     //carrega produtos de uma marca específica
     getProdutosDaMarca(marca: string){
         return this.httpClient.get<Marca[]>(`${this.urlMarcasApi}/${marca}`)
@@ -25,6 +30,10 @@ export class MarcasService {
 
     getProdutosFiltrados(marca: string) {
         return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?product_marca=${marca}`);
+    }
+
+    getMarcaByName(nome_marca: string): Observable<Marca> {
+        return this.httpClient.get<Marca>(`${this.urlMarcasApi}?nome_marca=${nome_marca}`);
     }
 
     getMarca(): string{

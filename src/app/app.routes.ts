@@ -5,11 +5,17 @@ import { CadastroProdutosComponent } from './pages/cadastro-produtos/cadastro-pr
 import { getProdutos } from './shared/resolvers/getProdutos.resolver';
 import { AdmComponent } from './pages/adm/adm.component';
 import { getProduto } from './shared/resolvers/getProduto.resolver';
+import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomeComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: 'produtos',
@@ -20,11 +26,13 @@ export const routes: Routes = [
     },
     {
         path: 'cadastrar-produto',
-        component: CadastroProdutosComponent
+        component: CadastroProdutosComponent,
+        canActivate: [AuthGuard] // Protegendo esta rota
     },
     {
         path: 'area-adm',
-        component: AdmComponent
+        component: AdmComponent,
+        canActivate: [AuthGuard] // Protegendo esta rota
     },
     {
         path: 'edit-product/:id',
@@ -35,6 +43,7 @@ export const routes: Routes = [
             import('./pages/adm/product-table/edit-product/edit-product.component').then(
                 (m) => m.EditProductComponent
             ),
+        canActivate: [AuthGuard] // Protegendo esta rota
 
     }
 ];
