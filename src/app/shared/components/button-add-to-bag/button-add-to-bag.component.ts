@@ -20,7 +20,7 @@ export class ButtonAddToBagComponent {
     this.carrinhoService.addProductToBag(
       this.productCart.product_id, this.productCart.product_name, this.productCart.product_image,
       this.productCart.product_price, this.productCart.product_description, 
-      this.productCart.product_marca
+      this.productCart.product_marca, this.productCart.product_categoria
     )
   }
 
