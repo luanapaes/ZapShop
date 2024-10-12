@@ -7,16 +7,16 @@ import { CartProduct } from '../interfaces/cart-product.interface';
 export class CarrinhoService {
     private produtosCarrinho: CartProduct[] = [];
 
-    addProductToBag(productId: string, productName: string, productImage: string, productPrice: number, productDescription: string, productMarca: string, productCartegory: string[]) {
+    addProductToBag(nomeProduto: string, productImage: string,
+        precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
         const product: CartProduct = {
-            product_id: productId,
-            product_name: productName,
             qtd_product: 1,
-            product_image: productImage,
-            product_price: productPrice,
-            product_description: productDescription,
-            product_marca: productMarca,
-            product_categoria: productCartegory
+            nome_produto: nomeProduto,
+            produto_image: productImage,
+            produto_preco: precoProduto,
+            produto_descricao: descricaoProduto,
+            nome_marca: marcaProduto,
+            categorias: categoriaProduto
         };
 
         this.produtosCarrinho.push(product);

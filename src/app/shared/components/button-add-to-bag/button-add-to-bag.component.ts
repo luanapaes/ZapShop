@@ -18,9 +18,9 @@ export class ButtonAddToBagComponent {
   addProductToBag() {
     this.matSnackBar.open("Produto adicionado ao carrinho", "OK")
     this.carrinhoService.addProductToBag(
-      this.productCart.product_id, this.productCart.product_name, this.productCart.product_image,
-      this.productCart.product_price, this.productCart.product_description, 
-      this.productCart.product_marca, this.productCart.product_categoria
+      this.productCart.nome_produto, this.productCart.produto_image,
+      this.productCart.produto_preco, this.productCart.produto_descricao,
+      this.productCart.nome_marca, this.productCart.categorias
     )
   }
 

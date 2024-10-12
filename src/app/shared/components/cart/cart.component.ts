@@ -75,7 +75,7 @@ export class CartComponent {
 
   calcularCarrinho() {
     const valoresProdutos = this.produtosCarrinho.map((prod) => {
-      return prod.product_price * parseInt(prod.qtd_product.toString());
+      return prod.produto_preco * parseInt(prod.qtd_product.toString());
     });
 
     let totalCompra = this.total();
@@ -93,7 +93,7 @@ export class CartComponent {
 
   finalizarPedido() {
     if (this.produtosCarrinho.length > 0) {
-      let mensagem = `Olá, me chamo ${this.usernameLocalStorage.firstCtrl}! Selecionei alguns produtos do catálogo e gostaria de finalizar a compra. 😊\n\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.product_name.replace('', ' ') + " - " + prod.qtd_product + " " + "uni" })
+      let mensagem = `Olá, me chamo ${this.usernameLocalStorage.firstCtrl}! Selecionei alguns produtos do catálogo e gostaria de finalizar a compra. 😊\n\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.nome_produto.replace('', ' ') + " - " + prod.qtd_product + " " + "uni" })
         }.\nPreço total da compra: R$${this.calcularCarrinho().toFixed(2)}.`;
 
       if (this.parcela) {

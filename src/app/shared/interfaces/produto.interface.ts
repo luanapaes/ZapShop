@@ -1,9 +1,10 @@
 export interface Produto {
-    product_id: string;
-    product_name: string;
-    product_image: string;
-    product_price: number;
-    product_description: string, 
-    product_marca: string;
-    product_categoria: string[]
+    produto_id?: number;
+    nome_produto: string;
+    produto_image: string;
+    produto_preco: number;
+    produto_descricao: string;
+    categorias: string;
+    marcaId?: number;
+    nome_marca: string;
 }

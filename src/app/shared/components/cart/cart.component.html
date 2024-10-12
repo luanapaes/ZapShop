@@ -2,11 +2,11 @@
 @if (produtosCarrinho.length != 0) {
 <mat-dialog-content class="mat-typography">
   <ul>
-    @for (produto of produtosCarrinho; track produto.product_id) {
+    @for (produto of produtosCarrinho; track produto.produto_id) {
     <li>
-      <h2>{{ produto.product_name }}</h2>
-      <p>{{ produto.product_description }}</p>
-      <p>R${{ produto.product_price }}</p>
+      <h2>{{ produto.nome_produto}}</h2>
+      <p>{{ produto.produto_descricao }}</p>
+      <p>R${{ produto.produto_preco}}</p>
       <label>Quantidade
         <input type="number" min="0" [(ngModel)]="produto.qtd_product">
       </label>

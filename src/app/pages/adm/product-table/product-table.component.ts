@@ -44,6 +44,6 @@ export class ProductTableComponent {
 
   onEdit(produto: Produto) {
     console.log(produto)
-    this.router.navigate(['edit-product', produto.product_id])
+    this.router.navigate(['edit-product', produto.produto_id])
   }
 }

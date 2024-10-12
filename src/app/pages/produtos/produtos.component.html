@@ -21,13 +21,13 @@
         <div class="cards">
             @for (produto of arrayProdutosFiltrados(); track produto) {
             <app-card-produto class="card-content" 
-                [productId]="produto.product_id" 
-                [productName]="produto.product_name"
-                [productImage]="produto.product_image"
-                [productDescription]="produto.product_description" 
-                [productPrice]="produto.product_price"
-                [productMarca]="produto.product_marca" 
-                [productCategory]="produto.product_categoria"
+                [productId]="produto.produto_id" 
+                [productName]="produto.nome_produto"
+                [productImage]="produto.produto_image"
+                [productDescription]="produto.produto_descricao" 
+                [productPrice]="produto.produto_preco"
+                [productMarca]="produto.nome_marca" 
+                [productCategory]="produto.categorias"
             >
             </app-card-produto>
             }
@@ -35,10 +35,15 @@
         }@else {
         <div class="cards">
             @for (produto of produtos(); track produto) {
-            <app-card-produto class="card-content" [productId]="produto.product_id" [productName]="produto.product_name"
-                [productImage]="produto.product_image" [productDescription]="produto.product_description"
-                [productPrice]="produto.product_price" [productMarca]="produto.product_marca"
-                [productCategory]="produto.product_categoria">
+            <app-card-produto class="card-content"
+                [productId]="produto.produto_id" 
+                [productName]="produto.nome_produto"
+                [productImage]="produto.produto_image"
+                [productDescription]="produto.produto_descricao" 
+                [productPrice]="produto.produto_preco"
+                [productMarca]="nomeMarca" 
+                [productCategory]="produto.categorias"
+                [marcaID]="produto.marcaId">
             </app-card-produto>
             }
         </div>
