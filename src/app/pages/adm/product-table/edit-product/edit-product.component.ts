@@ -18,11 +18,11 @@ export class EditProductComponent {
   product: Produto = inject(ActivatedRoute).snapshot.data['produto'] //carrega o produto vindo da url
   router = inject(Router)
 
-  onSubmit(product: Produto) {
-    this.produtosService.editProduct(this.product.product_id, product).
-      subscribe(() => {
-        this.matSnackBar.open("Produto editado com sucesso!", "Ok")
-        this.router.navigateByUrl('/')
-      })
-  }
+  // onSubmit(product: Produto) {
+  //   this.produtosService.editProduct(this.product.produto_id, product).
+  //     subscribe(() => {
+  //       this.matSnackBar.open("Produto editado com sucesso!", "Ok")
+  //       this.router.navigateByUrl('/')
+  //     })
+  // }
 }
