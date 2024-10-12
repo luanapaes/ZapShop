@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarcasService } from '../../services/MarcasService.service';
 import { Marca } from '../../interfaces/marca.interface';
-import { Categoria } from '../../interfaces/categoria.interface';
 
 @Component({
   selector: 'app-form-add-produto',
@@ -24,8 +23,10 @@ export class FormAddProdutoComponent {
   marcasService = inject(MarcasService);
   router = inject(Router)
 
+  arrayMarcas: string[] = [];
+
   imageSrc: string | ArrayBuffer | null = null;
-  categoriasList: string[] = []; // Inicia com array vazio
+  categoriasList: string[] = [];
 
   myProductForm = new FormGroup({
     product_id: new FormControl(),
@@ -38,17 +39,12 @@ export class FormAddProdutoComponent {
   });
 
   constructor() {
-    // Observa mudanças no campo de marca e carrega as categorias quando o valor mudar
+    this.carregarMarcas()
+
+    // fica observando as mudanças no campo de marca e carrega as categorias quando o valor mudar
     this.myProductForm.get('product_marca')?.valueChanges.subscribe(value => {
-      this.carregarCategorias();
+      this.carregarCategorias(this.myProductForm.controls.product_marca.value);
     });
-
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    console.log("categorias", this.carregarCategorias())
   }
 
   onFileSelected(event: Event): void {
@@ -69,24 +65,37 @@ export class FormAddProdutoComponent {
   selectedMarca: Signal<string> = signal<string>('');
   categorias: string = '';
 
-  carregarCategorias() {
-    const selectedMarca = this.myProductForm.value.product_marca;
-    console.log(selectedMarca)
-    if (selectedMarca) {
-      this.marcasService.getMarcaByName(selectedMarca).subscribe(
+  setMarca(marca: string) {
+    return this.marcasService.setMarca(marca)
+  }
+
+  carregarCategorias(marca: string) {
+    // const selectedMarca = this.myProductForm.value.product_marca;
+
+    var re = /\s*,\s*/; // para remover espaços e vírgulas
+
+    if (marca) {
+      this.marcasService.getMarcaByName(marca).subscribe(
         (marca: Marca) => {
-          console.log(marca)
-          return marca.categorias as string[]
+          var retorno = marca.categorias as string; //forcei para transformar em string
+          this.categoriasList = retorno.split(re);
         }
       )
     }
   }
 
+  carregarMarcas() {
+    this.marcasService.get().subscribe((marcas: Marca[]) => {
+      // usa o map para transformar o array de objetos Marca em um array de strings com os nomes das marcas
+      this.arrayMarcas = marcas.map(marca => marca.nome_marca);
+    });
+  }
+
 
   onSubmit() {
     if (this.myProductForm.valid) {
+      console.log("submit", this.myProductForm.value.product_categoria)
       this.produtosService.addNewProduct(
-        this.myProductForm.value.product_id,
         this.myProductForm.value.product_name,
         this.myProductForm.value.product_image,
         this.myProductForm.value.product_price,
@@ -94,6 +103,7 @@ export class FormAddProdutoComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
+
         this.matSnackBar.open("Produto cadastrado com sucesso!", "OK")
         this.router.navigate(['produtos'])
       })
