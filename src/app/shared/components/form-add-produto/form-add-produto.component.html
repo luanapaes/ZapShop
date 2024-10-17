@@ -1,10 +1,10 @@
 <div class="form-container">
 
-    <form [formGroup]="myProductForm" (submit)="onSubmit()">
+    <form [formGroup]="myProductForm" (submit)="onSubmit()" enctype="multipart/form-data">
         <div class="view-image">
             <img [src]="imageSrc" alt="Selecione uma imagem" class="card-img" id="uploaded-image" src="#">
             <div class="card-body">
-                <input type="file" accept="image/*" formControlName="product_image" required="true" (change)="onFileSelected($event)"
+                <input type="file" accept="image/*" formControlName="produto_image" required="true" (change)="onFileSelected($event)"
                     class="form-control" id="upload-input">
             </div>
         </div>
