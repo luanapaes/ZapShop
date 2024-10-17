@@ -11,31 +11,30 @@ export class ProdutosService {
 
     apiUrl = "/api/produtos";
 
-    addNewProduct(id: string, nomeProduto: string, productImage: string,
-        precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string[]) {
+    addNewProduct(nomeProduto: string, produto_imagem: File, precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
+        
+        // criando um  FormData
+        const formData = new FormData();
 
-        const produto: Produto = {
-            product_id: id,
-            product_name: nomeProduto,
-            product_image: productImage,
-            product_price: precoProduto,
-            product_description: descricaoProduto,
-            product_marca: marcaProduto,
-            product_categoria: categoriaProduto
-        }
+        formData.append('nome_produto', nomeProduto);
+        formData.append('produto_preco', precoProduto.toString());
+        formData.append('produto_descricao', descricaoProduto);
+        formData.append('nome_marca', marcaProduto);
+        formData.append('categorias', categoriaProduto);
+        formData.append('produto_imagem', produto_imagem); 
 
-        return this.httpClient.post<Produto>(this.apiUrl, produto)
+        return this.httpClient.post<Produto>(this.apiUrl, formData);
     }
 
     getProdutos() {
         return this.httpClient.get<Produto[]>(this.apiUrl)
     }
 
-    getProdutoById(product_id: string){
+    getProdutoById(product_id: string) {
         return this.httpClient.get<Produto>(`${this.apiUrl}?product_id=${product_id}`)
     }
 
-    editProduct(id: string, payload: Produto) {
+    editProduct(id: number, payload: Produto) {
         return this.httpClient.put(`/api/products/${id}`, payload)
     }
 
