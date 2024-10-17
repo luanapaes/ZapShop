@@ -14,7 +14,7 @@ import { MarcasService } from '../../services/MarcasService.service';
 export class CardProdutoComponent {
   @Input() productId?: number;
   @Input() productName: string = '';
-  @Input() productImage: string = '';
+  @Input() productImage?: string = '';
   @Input() productPrice: number = 0;
   @Input() productDescription: string = '';
   @Input() productCategory: string = '';
@@ -46,7 +46,7 @@ export class CardProdutoComponent {
         // Inicialize o produto com nomeMarca após a resposta
         this.product = {
           nome_produto: this.productName,
-          produto_image: this.productImage,
+          produto_imagem: this.productImage,
           produto_preco: this.productPrice,
           produto_descricao: this.productDescription,
           nome_marca: this.nomeMarca,

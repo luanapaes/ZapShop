@@ -12,7 +12,7 @@ export class CarrinhoService {
         const product: CartProduct = {
             qtd_product: 1,
             nome_produto: nomeProduto,
-            produto_image: productImage,
+            produto_imagem: productImage,
             produto_preco: precoProduto,
             produto_descricao: descricaoProduto,
             nome_marca: marcaProduto,
