@@ -25,13 +25,14 @@ export class FormAddProdutoComponent {
 
   arrayMarcas: string[] = [];
 
-  imageSrc: string | ArrayBuffer | null = null;
+  imageSrc: string | ArrayBuffer | File| null = null;
   categoriasList: string[] = [];
+
 
   myProductForm = new FormGroup({
     product_id: new FormControl(),
     product_name: new FormControl(),
-    product_image: new FormControl(),
+    produto_image: new FormControl(),
     product_price: new FormControl(),
     product_marca: new FormControl(),
     product_description: new FormControl(),
@@ -94,20 +95,19 @@ export class FormAddProdutoComponent {
 
   onSubmit() {
     if (this.myProductForm.valid) {
-      console.log("submit", this.myProductForm.value.product_categoria)
       this.produtosService.addNewProduct(
         this.myProductForm.value.product_name,
-        this.myProductForm.value.product_image,
+        this.imageSrc as File,
         this.myProductForm.value.product_price,
         this.myProductForm.value.product_description,
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
-
         this.matSnackBar.open("Produto cadastrado com sucesso!", "OK")
         this.router.navigate(['produtos'])
       })
     } else {
+      this.matSnackBar.open("Preencha os campos necessários.", "OK")
       console.log("Não enviado.")
     }
   }
