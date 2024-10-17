@@ -3,10 +3,10 @@ import { CardProdutoComponent } from '../../shared/components/card-produto/card-
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { Produto } from '../../shared/interfaces/produto.interface';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { ProdutosService } from '../../shared/services/ProdutosService.service';
 import { ActivatedRoute } from '@angular/router';
 import { FiltrosComponent } from '../../shared/components/filtros/filtros.component';
 import { MarcasService } from '../../shared/services/MarcasService.service';
+import { Marca } from '../../shared/interfaces/marca.interface';
 
 @Component({
   selector: 'app-produtos',
@@ -17,6 +17,7 @@ import { MarcasService } from '../../shared/services/MarcasService.service';
 })
 export class ProdutosComponent {
   produtos = signal<Produto[]>(inject(ActivatedRoute).snapshot.data['produtos'])
+  nomeMarca: string = '';
 
   marca = signal<string>('');
   arrayProdutosFiltrados = signal<Produto[]>([])
