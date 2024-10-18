@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { ProductTableComponent } from "./product-table/product-table.component";
 import { Produto } from '../../shared/interfaces/produto.interface';
@@ -17,7 +17,8 @@ import { CreateMarcaDialogComponent } from './product-table/create-marca-dialog/
   styleUrl: './adm.component.scss'
 })
 export class AdmComponent {
-  produtos: Produto[] = []
+  produtos = signal<Produto[]>([])
+
   produtosService = inject(ProdutosService)
   
   marcas: Marca[] = []
@@ -37,7 +38,7 @@ export class AdmComponent {
   carregarProdutos() {
     this.produtosService.getProdutos().subscribe(
       (produto: Produto[]) => {
-        this.produtos = produto
+        this.produtos.set(produto)
       }
     )
   }
