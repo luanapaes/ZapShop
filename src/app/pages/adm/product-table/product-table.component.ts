@@ -4,6 +4,9 @@ import { Produto } from '../../../shared/interfaces/produto.interface';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { MarcasService } from '../../../shared/services/MarcasService.service';
+import { ConfirmDeleteComponent } from '../../../shared/components/confirm-delete/confirm-delete.component';
+import { MatDialog } from '@angular/material/dialog';
+import { filter, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-table',
@@ -14,6 +17,8 @@ import { MarcasService } from '../../../shared/services/MarcasService.service';
 })
 
 export class ProductTableComponent {
+  constructor(public dialog: MatDialog) { }
+  
   produtosService = inject(ProdutosService)
   produtosArray: Produto[] = [];
 
@@ -44,21 +49,30 @@ export class ProductTableComponent {
     )
   }
 
-
-  deleteProduto(product_id: string): void {
-    this.produtosService.deleteProductById(product_id).subscribe(
-      () => {
-        console.log('Produto excluído com sucesso');
-        this.carregarProdutos()
-      },
-      (error) => {
-        console.error('Erro ao excluir o produto:', error);
-      }
-    );
-  }
-
   onEdit(produto: Produto) {
     console.log(produto)
-    this.router.navigate(['edit-product', produto.produto_id])
+    this.router.navigate(['edit-product', produto.id])
   }
+
+  openDialog(): Observable<boolean> {
+    return this.dialog.open(ConfirmDeleteComponent, 
+      { 
+        height: 'auto', 
+        width: '280px' 
+      }
+    ).afterClosed()
+  }
+
+  onDelete(id: number){
+    this.openDialog()
+    .pipe(filter((anwser) => anwser === true))
+      .subscribe(() => {
+        this.produtosService.deleteProductById(id).subscribe(() => {
+          this.produtosService.getProdutos().subscribe((prod) => {
+            this.produtosArray = prod
+          })
+        });
+      })
+  }
+  
 }
