@@ -29,7 +29,7 @@ export class MarcasService {
     }
 
     getProdutosFiltrados(marca: string) {
-        return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?product_marca=${marca}`);
+        return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?nome_marca=${marca}`);
     }
 
     getMarcaByName(nome_marca: string): Observable<Marca> {
