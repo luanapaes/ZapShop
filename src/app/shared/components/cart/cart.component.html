@@ -2,7 +2,7 @@
 @if (produtosCarrinho.length != 0) {
 <mat-dialog-content class="mat-typography">
   <ul>
-    @for (produto of produtosCarrinho; track produto.produto_id) {
+    @for (produto of produtosCarrinho; track produto.id) {
     <li>
       <h2>{{ produto.nome_produto}}</h2>
       <p>{{ produto.produto_descricao }}</p>

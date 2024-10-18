@@ -21,7 +21,7 @@
         <div class="cards">
             @for (produto of arrayProdutosFiltrados(); track produto) {
             <app-card-produto class="card-content" 
-                [productId]="produto.produto_id" 
+                [productId]="produto.id" 
                 [productName]="produto.nome_produto"
                 [productImage]="produto.produto_imagem"
                 [productDescription]="produto.produto_descricao" 
@@ -36,7 +36,7 @@
         <div class="cards">
             @for (produto of produtos(); track produto) {
             <app-card-produto class="card-content"
-                [productId]="produto.produto_id" 
+                [productId]="produto.id" 
                 [productName]="produto.nome_produto"
                 [productImage]="produto.produto_imagem"
                 [productDescription]="produto.produto_descricao" 
