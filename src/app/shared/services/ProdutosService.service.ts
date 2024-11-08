@@ -31,11 +31,21 @@ export class ProdutosService {
     }
 
     getProdutoById(product_id: string) {
-        return this.httpClient.get<Produto>(`${this.apiUrl}?product_id=${product_id}`)
+        return this.httpClient.get<Produto>(`${this.apiUrl}/${product_id}`)
     }
 
-    editProduct(id: number, payload: Produto) {
-        return this.httpClient.put(`/api/products/${id}`, payload)
+    editProduct(id: string, nomeProduto: string, produto_imagem: File, precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
+        // criando um  FormData
+        const formData = new FormData();
+
+        formData.append('nome_produto', nomeProduto);
+        formData.append('produto_preco', precoProduto.toString());
+        formData.append('produto_descricao', descricaoProduto);
+        formData.append('nome_marca', marcaProduto);
+        formData.append('categorias', categoriaProduto);
+        formData.append('produto_imagem', produto_imagem); 
+
+        return this.httpClient.patch(`${this.apiUrl}/${id}`, formData)
     }
 
     deleteProductById(product_id: number): Observable<void> {
