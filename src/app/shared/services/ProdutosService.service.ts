@@ -38,13 +38,31 @@ export class ProdutosService {
         // criando um  FormData
         const formData = new FormData();
 
-        formData.append('nome_produto', nomeProduto);
-        formData.append('produto_preco', precoProduto.toString());
-        formData.append('produto_descricao', descricaoProduto);
-        formData.append('nome_marca', marcaProduto);
-        formData.append('categorias', categoriaProduto);
-        formData.append('produto_imagem', produto_imagem); 
+        if(nomeProduto){
+            formData.append('nome_produto', nomeProduto);
+        }
 
+        if(precoProduto){
+            formData.append('produto_preco', precoProduto.toString());
+        }
+
+        if(descricaoProduto){
+            formData.append('produto_descricao', descricaoProduto);
+        }
+
+        if(marcaProduto){
+            formData.append('nome_marca', marcaProduto);
+        }
+
+        if(categoriaProduto){
+            formData.append('categorias', categoriaProduto);
+        }
+
+        if(produto_imagem){
+            formData.append('produto_imagem', produto_imagem); 
+        }
+
+        console.log(formData.get(nomeProduto))
         return this.httpClient.patch(`${this.apiUrl}/${id}`, formData)
     }
 
