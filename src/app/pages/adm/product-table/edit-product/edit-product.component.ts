@@ -157,7 +157,7 @@ export class EditProductComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
-        this.matSnackBar.open("Produto cadastrado com sucesso!", "OK");
+        this.matSnackBar.open("Produto editado com sucesso!", "OK");
         this.router.navigate(['produtos'])
       })
     } else {
