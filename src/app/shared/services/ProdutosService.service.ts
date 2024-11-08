@@ -61,8 +61,7 @@ export class ProdutosService {
         if(produto_imagem){
             formData.append('produto_imagem', produto_imagem); 
         }
-
-        console.log(formData.get(nomeProduto))
+        
         return this.httpClient.patch(`${this.apiUrl}/${id}`, formData)
     }
 
