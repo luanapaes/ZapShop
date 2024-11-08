@@ -1,1 +1,61 @@
-<p>edit-product works!</p>
+<div class="edit-container">
+  <app-header></app-header>
+  <div class="form-container">
+  
+    <form [formGroup]="myProductForm" (submit)="onEdit()" enctype="multipart/form-data">
+      <div class="view-image">
+        <img [src]="imageSrc" alt="Selecione uma imagem" class="card-img" id="uploaded-image" src="#">
+        <div class="card-body">
+          <input type="file" accept="image/*" formControlName="produto_image" required="true"
+            (change)="onFileSelected($event)" class="form-control" id="upload-input">
+        </div>
+      </div>
+  
+      <div class="form-inputs">
+        <label>
+          Nome do produto
+          <input type="text" formControlName="product_name" [placeholder]="produto.nome_produto" required="true">
+        </label>
+  
+        <label>
+          Preço do produto
+          <input type="text" formControlName="product_price" [placeholder]="produto.produto_preco | currency: 'BRL'" required="true">
+        </label>
+  
+        <label>
+          Descrição
+          <input type="text" formControlName="product_description" [placeholder]="produto.produto_descricao"
+            required="true" maxlength="40">
+        </label>
+  
+        <label>
+          <mat-form-field>
+            <mat-label>Marca</mat-label>
+            <mat-select [formControl]="myProductForm.controls.product_marca" [(ngModel)]="selectedMarca"
+              (selectionChange)="setMarca(selectedMarca())">
+              @for (marca of arrayMarcas; track marca) {
+              <mat-option [value]="marca">{{marca}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </label>
+  
+        <label>
+          <mat-form-field>
+            <mat-label>Categoria</mat-label>
+            <mat-select [formControl]="myProductForm.controls.product_categoria">
+              <mat-select-trigger>
+                {{myProductForm.controls.product_categoria.value}}
+              </mat-select-trigger>
+              @for (categoria of categoriasList; track categoria) {
+              <mat-option [value]="categoria">{{categoria}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </label>
+        <button type="submit">Editar produto</button>
+      </div>
+  
+    </form>
+  </div>
+</div>
