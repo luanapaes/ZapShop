@@ -4,8 +4,8 @@
         <div class="view-image">
             <img [src]="imageSrc" alt="Selecione uma imagem" class="card-img" id="uploaded-image" src="#">
             <div class="card-body">
-                <input type="file" accept="image/*" formControlName="produto_image" required="true" (change)="onFileSelected($event)"
-                    class="form-control" id="upload-input">
+                <input type="file" accept="image/*" formControlName="produto_image" required="true"
+                    (change)="onFileSelected($event)" class="form-control" id="upload-input">
             </div>
         </div>
 
@@ -29,9 +29,10 @@
             <label>
                 <mat-form-field>
                     <mat-label>Marca</mat-label>
-                    <mat-select [formControl]="myProductForm.controls.product_marca" [(ngModel)]="selectedMarca" (selectionChange)="setMarca(selectedMarca())">
+                    <mat-select [formControl]="myProductForm.controls.product_marca" [(ngModel)]="selectedMarca"
+                        (selectionChange)="setMarca(selectedMarca())">
                         @for (marca of arrayMarcas; track marca) {
-                        <mat-option [value]="marca" >{{marca}}</mat-option>
+                        <mat-option [value]="marca">{{marca}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
@@ -50,7 +51,6 @@
                     </mat-select>
                 </mat-form-field>
             </label>
-
             <button type="submit">Cadastrar produto</button>
         </div>
 
