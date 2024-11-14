@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Marca } from '../interfaces/marca.interface';
-import { Produto } from '../interfaces/produto.interface';
 import { Observable } from 'rxjs';
+import { CustomMarca } from '../interfaces/custom-marca.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -29,7 +29,7 @@ export class MarcasService {
     }
 
     getProdutosFiltrados(marca: string) {
-        return this.httpClient.get<Produto[]>(`${this.urlProdutosApi}?nome_marca=${marca}`);
+        return this.httpClient.get<CustomMarca>(`${this.urlMarcasApi}?nome_marca=${marca}`);
     }
 
     getMarcaByName(nome_marca: string): Observable<Marca> {
