@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Marca } from '../interfaces/marca.interface';
 import { Produto } from '../interfaces/produto.interface';
@@ -44,13 +44,14 @@ export class MarcasService {
         this.marcaSelecionada.set(marca)
     }
 
-    cadastrarMarca(marca: Marca){
-        const newMarca: Marca = {
-            nome_marca: marca.nome_marca,
-            categorias: marca.categorias,
-            logomarca: marca.logomarca
-        }
+    cadastrarMarca(nomeMarca: string, categorias: string, logomarca: File){
+        
+        const formData = new FormData();
 
-        return this.httpClient.post<Marca>(this.urlMarcasApi,newMarca)
+        formData.append('nome_marca', nomeMarca);
+        formData.append('categorias', categorias),
+        formData.append('logomarca', logomarca)
+
+        return this.httpClient.post<Marca>(this.urlMarcasApi, formData)
     }
 }
