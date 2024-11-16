@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { ProdutosService } from '../../../shared/services/ProdutosService.service';
 import { Produto } from '../../../shared/interfaces/produto.interface';
 import { CurrencyPipe } from '@angular/common';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { MarcasService } from '../../../shared/services/MarcasService.service';
 import { ConfirmDeleteComponent } from '../../../shared/components/confirm-delete/confirm-delete.component';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, Observable } from 'rxjs';
+import { filter, forkJoin, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-table',
@@ -23,7 +23,7 @@ export class ProductTableComponent {
   produtosArray: Produto[] = [];
 
   marcasService = inject(MarcasService);
-  nomeMarca: string = '';
+  nomeMarca = signal<string>('');
 
   router = inject(Router)
 
@@ -35,19 +35,41 @@ export class ProductTableComponent {
   getMarcaByID(id: number) {
     this.marcasService.getMarcaByID(id).subscribe(
       (marca) => {
-        this.nomeMarca = marca.nome_marca
+        this.nomeMarca.set(marca.nome_marca)
       }
     )
   }
 
   carregarProdutos() {
-    this.produtosService.getProdutos().subscribe(
-      (produto: Produto[]) => {
-        produto.map((prod) => this.getMarcaByID(prod.marcaId!)) //carrega nome da marca
-        this.produtosArray = produto
-      }
-    )
-  }
+  this.produtosService.getProdutos().subscribe(
+    (produtos: Produto[]) => {
+      // cria um array de observáveis para buscar as marcas
+      const produtosComMarcas$ = produtos.map((produto) =>
+        this.marcasService.getMarcaByID(produto.marcaId!).pipe(
+          map(marca => ({
+            ...produto,
+            nome_marca: marca.nome_marca // adiciona o nome da marca ao produto
+          }))
+        )
+      );
+
+      // console.log("chegou aqui", produtosComMarcas$)
+
+      // usei o forkJoin para esperar todas as requisições
+      forkJoin(produtosComMarcas$).subscribe(
+        (produtosComMarcas) => {
+          this.produtosArray = produtosComMarcas;
+        },
+        (error) => {
+          console.error("Erro ao carregar produtos com marcas:", error);
+        }
+      );
+    },
+    (error) => {
+      console.error("Erro ao carregar produtos:", error);
+    }
+  );
+}
 
   onEdit(produto: Produto) {
     this.router.navigate(['edit-product', produto.id])
