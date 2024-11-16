@@ -11,20 +11,27 @@ export class ProdutosService {
 
     apiUrl = "/api/produtos";
 
-    addNewProduct(nomeProduto: string, produto_imagem: File, precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
-        
-        // criando um  FormData
-        const formData = new FormData();
+    // verifica se o precoProduto tem vírgula e substitui por ponto
+    substituir(el: string): string {
+        return el.replace(",", ".");
+    }
 
+    addNewProduct(nomeProduto: string, produto_imagem: File, precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
+        const precoProdutoStr = precoProduto.toString();
+        const precoProdutoCorrigido = precoProdutoStr.includes(",") ? this.substituir(precoProdutoStr) : precoProdutoStr;
+
+        // criando um FormData
+        const formData = new FormData();
         formData.append('nome_produto', nomeProduto);
-        formData.append('produto_preco', precoProduto.toString());
+        formData.append('produto_preco', precoProdutoCorrigido);
         formData.append('produto_descricao', descricaoProduto);
         formData.append('nome_marca', marcaProduto);
         formData.append('categorias', categoriaProduto);
-        formData.append('produto_imagem', produto_imagem); 
+        formData.append('produto_imagem', produto_imagem);
 
         return this.httpClient.post<Produto>(this.apiUrl, formData);
     }
+
 
     getProdutos() {
         return this.httpClient.get<Produto[]>(this.apiUrl)
