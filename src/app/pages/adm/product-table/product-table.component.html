@@ -1,4 +1,7 @@
 <div class="table-container">
+    @if (produtosArray.length == 0) {
+        <h2>Cadastre um novo produto</h2>
+    }@else {
     <table class="styled-table">
         <thead>
             <tr>
@@ -33,4 +36,5 @@
             }
         </tbody>
     </table>
+    }
 </div>
