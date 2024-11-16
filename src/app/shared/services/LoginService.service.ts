@@ -52,7 +52,7 @@ export class LoginService {
     deslogar() {
         if (this.isBrowser()) {
             localStorage.clear();
-            this.router.navigate(['login']);
+            this.router.navigate(['/']);
         }
     }
 
