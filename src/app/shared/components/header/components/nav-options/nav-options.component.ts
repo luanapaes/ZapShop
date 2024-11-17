@@ -1,8 +1,9 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../../services/LoginService.service';
 
 @Component({
   selector: 'app-nav-options',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './nav-options.component.scss'
 })
 export class NavOptionsComponent {
+  loginService = inject(LoginService)
   constructor(private router: Router){}
   
   @Input() isADM: boolean = true;
@@ -22,5 +24,13 @@ export class NavOptionsComponent {
 
   goToAdmPage() {
     this.router.navigate(['area-adm'])
+  }
+
+  goToMarcas(){
+    this.router.navigate(['marcas'])
+  }
+
+  deslogar(){
+    this.loginService.deslogar()
   }
 }
