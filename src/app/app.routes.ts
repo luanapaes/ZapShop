@@ -7,6 +7,7 @@ import { AdmComponent } from './pages/adm/adm.component';
 import { getProduto } from './shared/resolvers/getProduto.resolver';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MarcasComponent } from './pages/marcas/marcas.component';
 
 export const routes: Routes = [
     {
@@ -45,5 +46,10 @@ export const routes: Routes = [
             ),
         canActivate: [AuthGuard] // Protegendo esta rota
 
+    },
+    {
+        path: 'marcas',
+        component: MarcasComponent,
+        canActivate: [AuthGuard] // Protegendo esta rota
     }
 ];
