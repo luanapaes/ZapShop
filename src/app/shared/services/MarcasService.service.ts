@@ -54,4 +54,8 @@ export class MarcasService {
 
         return this.httpClient.post<Marca>(this.urlMarcasApi, formData)
     }
+
+    delete(id: number): Observable<void>{
+        return this.httpClient.delete<void>(`${this.urlMarcasApi}/${id}`)
+    }
 }
