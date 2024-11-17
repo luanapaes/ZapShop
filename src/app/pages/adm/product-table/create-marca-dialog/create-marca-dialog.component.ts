@@ -57,7 +57,7 @@ export class CreateMarcaDialogComponent {
         this.imageSrc as File
       ).subscribe(() => {
         this.matSnackBar.open("Marca cadastrada com sucesso!");
-        this.route.navigate(["area-adm"]);
+        this.route.navigate(["marcas"]);
       })
     } else{
       this.matSnackBar.open("Marca não cadastrada.")
