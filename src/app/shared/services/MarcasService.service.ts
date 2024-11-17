@@ -16,7 +16,7 @@ export class MarcasService {
 
     //carrega todas as marcas
     get(){
-        return this.httpClient.get<Marca[]>(this.urlMarcasApi)
+        return this.httpClient.get<CustomMarca[]>(this.urlMarcasApi)
     }
 
     getMarcaByID(id: number){
