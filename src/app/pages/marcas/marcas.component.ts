@@ -5,6 +5,8 @@ import { MarcasService } from '../../shared/services/MarcasService.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateMarcaDialogComponent } from '../adm/product-table/create-marca-dialog/create-marca-dialog.component';
 import { CustomMarca } from '../../shared/interfaces/custom-marca.interface';
+import { filter, Observable } from 'rxjs';
+import { ConfirmDeleteMarcaComponent } from './confirm-delete-marca/confirm-delete-marca.component';
 
 @Component({
   selector: 'app-marcas',
@@ -35,8 +37,25 @@ export class MarcasComponent {
     this.dialog.open(CreateMarcaDialogComponent);
   }
 
-  onDelete(id: string){
+  openDialogDelete(): Observable<boolean> {
+    return this.dialog.open(ConfirmDeleteMarcaComponent,
+      {
+        height: 'auto',
+        width: '280px'
+      }
+    ).afterClosed()
+  }
 
+  onDelete(id: number){
+    this.openDialogDelete()
+    .pipe(filter((anwser) => anwser === true))
+    .subscribe(() => {
+      this.marcasService.delete(id).subscribe(() => {
+        this.marcasService.get().subscribe((m) => {
+          this.arrayMarcas = m
+        })
+      })
+    })
   }
 
   onEdit(marca: CustomMarca){
