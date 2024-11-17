@@ -1,1 +1,52 @@
-<p>marcas works!</p>
+<div class="marcas-container">
+    <app-header></app-header>
+
+    <div class="content">
+        <div class="list-content">
+            <ul>
+                <li class="text">Marcas cadastradas: {{arrayMarcas.length}}</li>
+                <li>
+                    <button (click)="openDialog()">Adicionar marca</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="table-container">
+            @if (arrayMarcas.length == 0) {
+            <h2>Cadastre uma nova marca</h2>
+            }@else {
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categorias</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (marca of arrayMarcas; track marca.id) {
+                    <tr>
+                        <td>{{ marca.nome_marca }}</td>
+                        <td>{{ marca.categorias}}</td>
+                        
+                        <td class="btn-options">
+                            <span>
+                                <button (click)="onDelete(marca.id!)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </span>
+        
+                            <span>
+                                <button (click)="onEdit(marca)">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            }
+        </div>
+    </div>
+</div>
