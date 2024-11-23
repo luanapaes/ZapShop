@@ -19,7 +19,7 @@ export class MarcasService {
         return this.httpClient.get<CustomMarca[]>(this.urlMarcasApi)
     }
 
-    getMarcaByID(id: number){
+    getMarcaByID(id: number | string){
         return this.httpClient.get<Marca>(`${this.urlMarcasApi}/${id}`)
     }
 
