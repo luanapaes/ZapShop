@@ -8,6 +8,7 @@ import { getProduto } from './shared/resolvers/getProduto.resolver';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MarcasComponent } from './pages/marcas/marcas.component';
+import { getMarca } from './shared/resolvers/getMarca.resolver';
 
 export const routes: Routes = [
     {
@@ -51,5 +52,13 @@ export const routes: Routes = [
         path: 'marcas',
         component: MarcasComponent,
         canActivate: [AuthGuard] // Protegendo esta rota
+    },
+    {
+        path: 'marcas/:id',
+        resolve: {
+            marca: getMarca
+        },
+        component: MarcasComponent,
+        canActivate: [AuthGuard]
     }
 ];
