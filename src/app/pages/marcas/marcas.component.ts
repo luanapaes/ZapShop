@@ -7,6 +7,8 @@ import { CreateMarcaDialogComponent } from '../adm/product-table/create-marca-di
 import { CustomMarca } from '../../shared/interfaces/custom-marca.interface';
 import { filter, Observable } from 'rxjs';
 import { ConfirmDeleteMarcaComponent } from './confirm-delete-marca/confirm-delete-marca.component';
+import { EditMarcaComponent } from './edit-marca/edit-marca.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-marcas',
@@ -18,6 +20,7 @@ import { ConfirmDeleteMarcaComponent } from './confirm-delete-marca/confirm-dele
 export class MarcasComponent {
   marcasService = inject(MarcasService);
   arrayMarcas: CustomMarca[] = [];
+  router = inject(Router)
 
   constructor(public dialog: MatDialog) { }
 
@@ -35,6 +38,12 @@ export class MarcasComponent {
 
   openDialog() {
     this.dialog.open(CreateMarcaDialogComponent);
+  }
+
+  openDialogEditMarca(id: number) {
+    this.router.navigate(['marcas', id]).then(() => {
+      this.dialog.open(EditMarcaComponent);
+    })
   }
 
   openDialogDelete(): Observable<boolean> {
