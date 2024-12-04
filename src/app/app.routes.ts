@@ -37,14 +37,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard] // Protegendo esta rota
     },
     {
-        path: 'edit-product/:id',
+        path: 'produto/:id',
         resolve: {
             product: getProduto //função do file(resolvers/get-product)
         },
-        loadComponent: () =>
-            import('./pages/adm/product-table/edit-product/edit-product.component').then(
-                (m) => m.EditProductComponent
-            ),
+        component: AdmComponent,
         canActivate: [AuthGuard] // Protegendo esta rota
 
     },
