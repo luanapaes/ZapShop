@@ -1,8 +1,9 @@
-<div class="edit-container">
-  <app-header></app-header>
+<h2 mat-dialog-title>Editar marca</h2>
+
+<mat-dialog-content>
   <div class="form-container">
   
-    <form [formGroup]="myProductForm" (submit)="onEdit()" enctype="multipart/form-data">
+    <form [formGroup]="myProductForm" enctype="multipart/form-data">
       <div class="view-image">
         <img [src]="imageSrc" alt="Selecione uma imagem" class="card-img" id="uploaded-image" src="#">
         <div class="card-body">
@@ -14,17 +15,19 @@
       <div class="form-inputs">
         <label>
           Nome do produto
-          <input type="text" formControlName="product_name" [placeholder]="produto.nome_produto" required="true">
+          <input type="text" formControlName="product_name" [placeholder]="myProductForm.value.product_name"
+            required="true">
         </label>
   
         <label>
           Preço do produto
-          <input type="text" formControlName="product_price" [placeholder]="produto.produto_preco | currency: 'BRL'" required="true">
+          <input type="text" formControlName="product_price"
+            [placeholder]="myProductForm.value.product_price| currency: 'BRL'" required="true">
         </label>
   
         <label>
           Descrição
-          <input type="text" formControlName="product_description" [placeholder]="produto.produto_descricao"
+          <input type="text" formControlName="product_description" [placeholder]="myProductForm.value.product_description"
             required="true" maxlength="40">
         </label>
   
@@ -53,9 +56,11 @@
             </mat-select>
           </mat-form-field>
         </label>
-        <button type="submit">Editar produto</button>
       </div>
-  
     </form>
   </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="onEdit()">Editar</button>
+</mat-dialog-actions>
