@@ -7,6 +7,7 @@ import { MarcasService } from '../../../shared/services/MarcasService.service';
 import { ConfirmDeleteComponent } from '../../../shared/components/confirm-delete/confirm-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, forkJoin, map, Observable } from 'rxjs';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @Component({
   selector: 'app-product-table',
@@ -18,7 +19,7 @@ import { filter, forkJoin, map, Observable } from 'rxjs';
 
 export class ProductTableComponent {
   constructor(public dialog: MatDialog) { }
-  
+
   produtosService = inject(ProdutosService)
   produtosArray: Produto[] = [];
 
@@ -41,52 +42,54 @@ export class ProductTableComponent {
   }
 
   carregarProdutos() {
-  this.produtosService.getProdutos().subscribe(
-    (produtos: Produto[]) => {
-      // cria um array de observáveis para buscar as marcas
-      const produtosComMarcas$ = produtos.map((produto) =>
-        this.marcasService.getMarcaByID(produto.marcaId!).pipe(
-          map(marca => ({
-            ...produto,
-            nome_marca: marca.nome_marca // adiciona o nome da marca ao produto
-          }))
-        )
-      );
+    this.produtosService.getProdutos().subscribe(
+      (produtos: Produto[]) => {
+        // cria um array de observáveis para buscar as marcas
+        const produtosComMarcas$ = produtos.map((produto) =>
+          this.marcasService.getMarcaByID(produto.marcaId!).pipe(
+            map(marca => ({
+              ...produto,
+              nome_marca: marca.nome_marca // adiciona o nome da marca ao produto
+            }))
+          )
+        );
 
-      // console.log("chegou aqui", produtosComMarcas$)
+        // console.log("chegou aqui", produtosComMarcas$)
 
-      // usei o forkJoin para esperar todas as requisições
-      forkJoin(produtosComMarcas$).subscribe(
-        (produtosComMarcas) => {
-          this.produtosArray = produtosComMarcas;
-        },
-        (error) => {
-          console.error("Erro ao carregar produtos com marcas:", error);
-        }
-      );
-    },
-    (error) => {
-      console.error("Erro ao carregar produtos:", error);
-    }
-  );
-}
+        // usei o forkJoin para esperar todas as requisições
+        forkJoin(produtosComMarcas$).subscribe(
+          (produtosComMarcas) => {
+            this.produtosArray = produtosComMarcas;
+          },
+          (error) => {
+            console.error("Erro ao carregar produtos com marcas:", error);
+          }
+        );
+      },
+      (error) => {
+        console.error("Erro ao carregar produtos:", error);
+      }
+    );
+  }
 
-  onEdit(produto: Produto) {
-    this.router.navigate(['edit-product', produto.id])
+  openDialogEditProduct(id: number) {
+    this.router.navigate(['produto', id]).then(() => {
+      this.dialog.open(EditProductComponent);
+    })
   }
 
   openDialog(): Observable<boolean> {
-    return this.dialog.open(ConfirmDeleteComponent, 
-      { 
-        height: 'auto', 
-        width: '280px' 
+    return this.dialog.open(ConfirmDeleteComponent,
+      {
+        height: 'auto',
+        width: '280px'
       }
     ).afterClosed()
   }
 
-  onDelete(id: number){
+  onDelete(id: number) {
     this.openDialog()
-    .pipe(filter((anwser) => anwser === true))
+      .pipe(filter((anwser) => anwser === true))
       .subscribe(() => {
         this.produtosService.deleteProductById(id).subscribe(() => {
           this.produtosService.getProdutos().subscribe((prod) => {
@@ -95,5 +98,5 @@ export class ProductTableComponent {
         });
       })
   }
-  
+
 }
