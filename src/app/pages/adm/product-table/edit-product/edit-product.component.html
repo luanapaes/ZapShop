@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Editar marca</h2>
+<h2 mat-dialog-title>Editar produto</h2>
 
 <mat-dialog-content>
   <div class="form-container">
@@ -21,7 +21,7 @@
   
         <label>
           Preço do produto
-          <input type="text" formControlName="product_price"
+          <input type="text" formControlName="product_price" [placeholder]="myProductForm.value.product_price"
             [placeholder]="myProductForm.value.product_price| currency: 'BRL'" required="true">
         </label>
   
@@ -46,9 +46,15 @@
         <label>
           <mat-form-field>
             <mat-label>Categoria</mat-label>
-            <mat-select [formControl]="myProductForm.controls.product_categoria">
+            <mat-select [formControl]="myProductForm.controls.product_categoria" multiple>
               <mat-select-trigger>
-                {{myProductForm.controls.product_categoria.value}}
+                {{myProductForm.controls.product_categoria.value?.[0] || ''}}
+                @if ((myProductForm.controls.product_categoria.value?.length || 0) > 1) {
+                  <span class="example-additional-selection">
+                    (+{{(myProductForm.controls.product_categoria.value.length || 0) - 1}})
+                    {{myProductForm.controls.product_categoria.value?.length === 2 ? 'outra' : 'outras'}}
+                  </span>
+                }
               </mat-select-trigger>
               @for (categoria of categoriasList; track categoria) {
               <mat-option [value]="categoria">{{categoria}}</mat-option>
@@ -61,6 +67,6 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancelar</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="onEdit()">Editar</button>
 </mat-dialog-actions>
