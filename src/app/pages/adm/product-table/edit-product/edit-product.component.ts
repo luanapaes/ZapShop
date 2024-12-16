@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, Inject, inject, Signal, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProdutosService } from '../../../../shared/services/ProdutosService.service';
@@ -13,6 +13,8 @@ import { CurrencyPipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-product',
@@ -21,7 +23,12 @@ import { MatSelectModule } from '@angular/material/select';
     FormAddProdutoComponent, HeaderComponent,
     ReactiveFormsModule, FormsModule,
     MatFormFieldModule, MatSelectModule,
-    MatInputModule, CurrencyPipe
+    MatInputModule, CurrencyPipe,
+    MatDialogTitle, MatDialogContent,
+    MatDialogActions, MatDialogClose,
+    MatButtonModule, MatFormFieldModule,
+    MatSelectModule, FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss'
@@ -29,7 +36,6 @@ import { MatSelectModule } from '@angular/material/select';
 export class EditProductComponent {
   produtosService = inject(ProdutosService)
   matSnackBar = inject(MatSnackBar)
-  product: Produto = inject(ActivatedRoute).snapshot.data['produto'] //carrega o produto vindo da url
   router = inject(Router)
 
   marcasService = inject(MarcasService);
@@ -43,12 +49,13 @@ export class EditProductComponent {
     produto_imagem: ''
   };
 
-  produtoID = ''
+  produtoID: string | undefined = '';
   isEdit: boolean = true;
 
+  idProd = ''
   arrayMarcas: string[] = [];
 
-  imageSrc: string | ArrayBuffer | File | null = null;
+  imageSrc: string | ArrayBuffer | File | null | undefined = null;
   categoriasList: string[] = [];
 
   selectedMarca: Signal<string> = signal<string>('');
@@ -64,46 +71,46 @@ export class EditProductComponent {
     product_categoria: new FormControl(),
   });
 
-
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { id: string },
+    private dialogRef: MatDialogRef<EditProductComponent>,
+  ) {
     this.carregarMarcas()
 
     // fica observando as mudanças no campo de marca e carrega as categorias quando o valor mudar
     this.myProductForm.get('product_marca')?.valueChanges.subscribe(value => {
       this.carregarCategorias(this.myProductForm.controls.product_marca.value);
     });
+  }
 
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.produtoID = id
-      if (id) {
-        this.getProduto(id); // Carrega o produto sempre que o ID mudar
-      }
+  ngOnInit() {
+    this.produtoID = this.data.id
+    this.getProduto(this.data.id);
+  }
+
+  //----------------------------
+  onCancel() {
+    this.dialogRef.close(true);
+  }
+
+
+  getProduto(id: string) {
+    this.produtosService.getProdutoById(id).subscribe((produto) => {
+      // Atribui os dados recebidos ao modelo de produto
+      this.produto = produto;
+      this.myProductForm.patchValue({
+        product_name: produto.nome_produto,
+        product_price: produto.produto_preco,
+        product_description: produto.produto_descricao,
+        product_marca: produto.nome_marca,
+        product_categoria: produto.categorias.split(',').map(item => item.trim())
+      });
+
+      this.imageSrc = produto.produto_imagem;
     });
   }
 
-  getProduto(id: string) {
-    this.produtosService.getProdutoById(id).
-      subscribe((prod) => {
-        this.produto = {
-          nome_produto: prod.nome_produto,
-          categorias: prod.categorias,
-          produto_preco: prod.produto_preco,
-          produto_descricao: prod.produto_descricao,
-          nome_marca: prod.nome_marca,
-          produto_imagem: prod.produto_imagem
-        }
 
-        // Atualiza o formulário com os dados do produto carregado
-        this.myProductForm.patchValue({
-          product_name: prod.nome_produto,
-          product_price: prod.produto_preco,
-          product_description: prod.produto_descricao,
-          product_marca: prod.nome_marca,
-          product_categoria: prod.categorias
-        });
-      })
-  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -147,9 +154,10 @@ export class EditProductComponent {
   }
 
   onEdit() {
+    console.log(this.produtoID)
     if (this.myProductForm) {
       this.produtosService.editProduct(
-        this.produtoID,
+        this.produtoID as string,
         this.myProductForm.value.product_name,
         this.imageSrc as File,
         this.myProductForm.value.product_price,
@@ -158,6 +166,7 @@ export class EditProductComponent {
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
         this.matSnackBar.open("Produto editado com sucesso!", "OK");
+        this.dialogRef.close('Produto editado com sucesso!');
         this.router.navigate(['produtos'])
       })
     } else {
