@@ -74,9 +74,19 @@ export class ProductTableComponent {
 
   openDialogEditProduct(id: number) {
     this.router.navigate(['produto', id]).then(() => {
-      this.dialog.open(EditProductComponent);
-    })
+      const dialogRef = this.dialog.open(EditProductComponent, {
+        data: { id: String(id) }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.router.navigate(['area-adm']); 
+        }
+      });
+    });
   }
+
+
 
   openDialog(): Observable<boolean> {
     return this.dialog.open(ConfirmDeleteComponent,
