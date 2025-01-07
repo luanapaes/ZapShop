@@ -42,6 +42,8 @@ export class ProdutosService {
     }
 
     editProduct(id: string, nomeProduto: string, produto_imagem: File, precoProduto: number, descricaoProduto: string, marcaProduto: string, categoriaProduto: string) {
+        const precoProdutoStr = precoProduto.toString();
+        const precoProdutoCorrigido = precoProdutoStr.includes(",") ? this.substituir(precoProdutoStr) : precoProdutoStr;
         // criando um  FormData
         const formData = new FormData();
 
@@ -50,7 +52,7 @@ export class ProdutosService {
         }
 
         if(precoProduto){
-            formData.append('produto_preco', precoProduto.toString());
+            formData.append('produto_preco', precoProdutoCorrigido);
         }
 
         if(descricaoProduto){
