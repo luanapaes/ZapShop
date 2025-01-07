@@ -105,8 +105,6 @@ export class EditProductComponent {
         product_marca: produto.nome_marca,
         product_categoria: produto.categorias.split(',').map(item => item.trim())
       });
-
-      this.imageSrc = produto.produto_imagem;
     });
   }
 
