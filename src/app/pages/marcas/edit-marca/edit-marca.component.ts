@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-marca',
@@ -17,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogActions, MatDialogClose,
     MatButtonModule, MatFormFieldModule,
     MatSelectModule, FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule, CommonModule],
   templateUrl: './edit-marca.component.html',
   styleUrl: './edit-marca.component.scss'
 })
@@ -29,6 +30,7 @@ export class EditMarcaComponent {
 
   marcaID: string | undefined = '';
   arrayCategorias: string[] = [];
+  categoriasList: string[] = ['Perfume', 'Hidratante', 'Kit', 'Maquiagem', 'Hidratação', 'Skincare'];
 
   imageSrc: string | ArrayBuffer | File | null = null;
 
@@ -47,7 +49,7 @@ export class EditMarcaComponent {
   ngOnInit(): void {
     //pega o id da url que vem por ex: marcas/32 
     const id = this.route.url.split("/").pop() as unknown as number;
-    
+
     this.marcaID = this.route.url.split("/").pop()
     this.getMarca(id)
   }
@@ -68,7 +70,7 @@ export class EditMarcaComponent {
   }
 
 
-  getMarca(id: number){
+  getMarca(id: number) {
     this.marcasService.getMarcaByID(id).subscribe(
       (marca) => {
         this.initMarca = {
@@ -98,7 +100,7 @@ export class EditMarcaComponent {
         this.imageSrc as File
       ).subscribe(() => {
         this.matSnackBar.open("Marca editada com sucesso!", "OK");
-        this.route.navigate(["marcas"]);
+        this.route.navigate(['marcas']);
       })
     } else {
       this.matSnackBar.open("Marca não editada.", "OK")
