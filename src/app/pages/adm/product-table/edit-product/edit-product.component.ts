@@ -161,7 +161,6 @@ export class EditProductComponent {
     var re = /\s*,\s*/; // para remover espaços e vírgulas
 
     if (marca) {
-      console.log(marca)
       this.marcasService.getMarcaByName(marca).subscribe(
         (marca: Marca) => {
           var retorno = marca.categorias as string; //forcei para transformar em string
@@ -179,7 +178,6 @@ export class EditProductComponent {
   }
 
   onEdit() {
-    console.log(this.produtoID)
     if (this.myProductForm) {
       this.produtosService.editProduct(
         this.produtoID as string,
