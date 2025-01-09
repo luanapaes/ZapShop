@@ -15,15 +15,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-product',
   standalone: true,
   imports: [
-    FormAddProdutoComponent, HeaderComponent,
     ReactiveFormsModule, FormsModule,
     MatFormFieldModule, MatSelectModule,
-    MatInputModule, CurrencyPipe,
+    MatInputModule,
     MatDialogTitle, MatDialogContent,
     MatDialogActions, MatDialogClose,
     MatButtonModule, MatFormFieldModule,
@@ -57,6 +58,12 @@ export class EditProductComponent {
 
   imageSrc: string | ArrayBuffer | File | null | undefined = null;
   categoriasList: string[] = [];
+
+  marcas: Marca = {
+    nome_marca: '',
+    categorias: '',
+    logomarca: ''
+  };
 
   selectedMarca: Signal<string> = signal<string>('');
   categorias: string = '';
@@ -96,19 +103,40 @@ export class EditProductComponent {
 
   getProduto(id: string) {
     this.produtosService.getProdutoById(id).subscribe((produto) => {
+
+      if (produto.marcaId !== undefined) {
+        this.getMarcaProd(produto.marcaId).subscribe((marca) => {
+          this.marcas = {
+            nome_marca: marca.nome_marca,
+            categorias: marca.categorias,
+            logomarca: marca.logomarca
+          }
+        });
+      }
+
+      this.carregarCategorias(this.marcas.nome_marca);
+
       // Atribui os dados recebidos ao modelo de produto
       this.produto = produto;
       this.myProductForm.patchValue({
         product_name: produto.nome_produto,
         product_price: produto.produto_preco,
         product_description: produto.produto_descricao,
-        product_marca: produto.nome_marca,
+        product_marca: this.marcas.nome_marca,
         product_categoria: produto.categorias.split(',').map(item => item.trim())
       });
     });
   }
 
-
+  getMarcaProd(id: number | string): Observable<Marca> {
+    return this.marcasService.getMarcaByID(id).pipe(
+      map((marca: Marca) => ({
+        nome_marca: marca.nome_marca,
+        categorias: marca.categorias,
+        logomarca: marca.logomarca,
+      }))
+    );
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -130,11 +158,10 @@ export class EditProductComponent {
   }
 
   carregarCategorias(marca: string) {
-    // const selectedMarca = this.myProductForm.value.product_marca;
-
     var re = /\s*,\s*/; // para remover espaços e vírgulas
 
     if (marca) {
+      console.log(marca)
       this.marcasService.getMarcaByName(marca).subscribe(
         (marca: Marca) => {
           var retorno = marca.categorias as string; //forcei para transformar em string
