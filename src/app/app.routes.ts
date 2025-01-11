@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MarcasComponent } from './pages/marcas/marcas.component';
 import { getMarca } from './shared/resolvers/getMarca.resolver';
+import { RecuperarSenhaComponent } from './pages/login/recuperar-senha/recuperar-senha.component';
 
 export const routes: Routes = [
     {
@@ -57,5 +58,9 @@ export const routes: Routes = [
         },
         component: MarcasComponent,
         canActivate: [AuthGuard]
+    }, 
+    {
+        path: 'recuperar-senha',
+        component: RecuperarSenhaComponent
     }
 ];
