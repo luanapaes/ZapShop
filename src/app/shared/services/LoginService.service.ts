@@ -24,15 +24,9 @@ export class LoginService {
                 // Verifica se o token foi recebido
                 if (!resposta.accessToken || !this.isBrowser()) return;
 
-                // Logando o token recebido no console para verificar
-                console.log("Token recebido:", resposta.accessToken);
-
                 // Armazenando o token no localStorage
                 localStorage.setItem('token', btoa(JSON.stringify(resposta.accessToken)));
                 localStorage.setItem('usuario', btoa(JSON.stringify(resposta.usuario)));
-
-                // Redirecionando para a rota home após login
-                this.router.navigate(['']);
             })
         );
     }
@@ -78,12 +72,12 @@ export class LoginService {
         return this.isBrowser() && localStorage.getItem('token') ? true : false;
     }
 
-    forgetPassword(email: string): Observable<any> {
-        return this.httpClient.post<any>(`${this.urlApi}/forget`, { email }, { responseType: 'text' as 'json' })
+    //emite um objeto contendo status, mensagem e, se for o caso, um token
+    forgetPassword(email: string): Observable<{ status: number; message: string; token: string }> {
+        return this.httpClient.post<{ status: number; message: string, token: string }>(`${this.urlApi}/forget`, { email });
     }
 
     resetPass(password: string, token: string){
-        console.log(password, token)
-        return this.httpClient.post<any>(`${this.urlApi}/reset`, { password, token }, { responseType: 'text' as 'json' })
+        return this.httpClient.post<any>(`${this.urlApi}/reset`, { password, token })
     }
 }
