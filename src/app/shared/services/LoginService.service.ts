@@ -62,7 +62,7 @@ export class LoginService {
         return usuario ? JSON.parse(atob(usuario)) : null;
     }
 
-    obterIdUsuarioLogado(){
+    obterIdUsuarioLogado() {
         if (!this.isBrowser()) return null;
         const usuario = localStorage.getItem('usuario');
         return usuario ? (JSON.parse(atob(usuario)) as any).id : null;
@@ -76,5 +76,14 @@ export class LoginService {
 
     logado(): boolean {
         return this.isBrowser() && localStorage.getItem('token') ? true : false;
+    }
+
+    forgetPassword(email: string): Observable<any> {
+        return this.httpClient.post<any>(`${this.urlApi}/forget`, { email }, { responseType: 'text' as 'json' })
+    }
+
+    resetPass(password: string, token: string){
+        console.log(password, token)
+        return this.httpClient.post<any>(`${this.urlApi}/reset`, { password, token }, { responseType: 'text' as 'json' })
     }
 }
