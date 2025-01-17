@@ -40,7 +40,7 @@ export class FormAddProdutoComponent {
     product_categoria: new FormControl(),
   });
 
-  constructor() {
+  constructor(private _snackBar: MatSnackBar) { 
     this.carregarMarcas()
 
     // fica observando as mudanças no campo de marca e carrega as categorias quando o valor mudar
@@ -104,8 +104,12 @@ export class FormAddProdutoComponent {
         this.myProductForm.value.product_marca,
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
-        this.matSnackBar.open("Produto cadastrado com sucesso!", "OK")
-        this.router.navigate(['produtos'])
+        this._snackBar.open('Cadastrando..', '', {
+          duration: 1200
+        });
+        setTimeout(() => {
+          this.router.navigate(['produtos'])
+        }, 2000);
       })
     } else {
       this.matSnackBar.open("Preencha os campos necessários.", "OK")
