@@ -81,6 +81,7 @@ export class EditProductComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     private dialogRef: MatDialogRef<EditProductComponent>,
+    private _snackBar: MatSnackBar,
   ) {
     this.carregarMarcas()
 
@@ -189,8 +190,6 @@ export class EditProductComponent {
         this.myProductForm.value.product_categoria
       ).subscribe(() => {
         this.matSnackBar.open("Produto editado com sucesso!", "OK");
-        this.dialogRef.close('Produto editado com sucesso!');
-        this.router.navigate(['produtos'])
       })
     } else {
       this.matSnackBar.open("Preencha os campos necessários.", "OK");
