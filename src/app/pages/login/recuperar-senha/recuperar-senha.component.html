@@ -1,0 +1,17 @@
+<div class="login-container">
+    <h1>Recuperar Senha</h1>
+
+    <div class="form">
+        <form [formGroup]="resetPasswordForm" (submit)="onSubmit()">
+            <label>E-mail
+                <input formControlName="email" type="email" placeholder="digite seu email.." autofocus>
+            </label>
+
+            <label>Senha
+                <input formControlName="newPassword" type="password" placeholder="digite a nova senha..">
+            </label>
+
+            <input type="submit" value="Recuperar Senha" class="enter">
+        </form>
+    </div>
+</div>
