@@ -8,13 +8,12 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarcasService } from '../../services/MarcasService.service';
 import { Marca } from '../../interfaces/marca.interface';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-add-produto',
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, MatFormFieldModule,
-    MatSelectModule, MatInputModule, CurrencyPipe],
+    MatSelectModule, MatInputModule],
   templateUrl: './form-add-produto.component.html',
   styleUrl: './form-add-produto.component.scss'
 })
