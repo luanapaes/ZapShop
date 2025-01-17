@@ -54,3 +54,25 @@ body {
         margin-bottom: 20px;
     }
 }
+
+@media (min-width: 375px) and (max-width: 430px) {
+    .marcas > h2{
+        margin-top: 8%;
+        font-size: 1.8em;
+    }
+
+    .conheca{
+        margin-top: 5%;
+
+        h1{
+            font-size: 1.6em;
+            text-align: center;
+        }
+    }
+}
+
+// @media (max-width: 240px) {
+//     .marcas > h2{
+//         margin-top: 0;
+//     }
+// }
