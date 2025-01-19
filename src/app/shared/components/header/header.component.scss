@@ -1,24 +1,26 @@
-.header-conatiner{
+.header-conatiner {
     height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    .image{
-        width: 25%;
+    .image {
+        width: 50%;
+        max-width: 250px;
+        min-width: 180px;
         height: 100%;
         background-image: url("../../../../assets/logo-zapshop-2.png");
         background-position: center;
         background-size: cover;
     }
 
-    .links{
+    .links {
         display: flex;
         align-items: center;
         padding-right: 40px;
         width: 400px;
 
-        ul{
+        ul {
             width: 100%;
             padding: 0 10px;
             display: flex;
@@ -27,13 +29,13 @@
             align-items: center;
             list-style: none;
 
-            li > a{
-                font-size: 1.3em;
+            li>a {
+                font-size: 1.4em;
                 color: #CF8C95;
                 text-decoration: none;
                 transition: all .5s ease;
 
-                &:hover{
+                &:hover {
                     height: 20px;
                     background-color: #ECECEC;
                     border-radius: 25px;
@@ -41,7 +43,7 @@
                 }
             }
 
-            .btn-cart{
+            .btn-cart {
                 cursor: pointer;
                 transition: transform .5s ease-in;
                 border: none;
@@ -49,22 +51,56 @@
 
                 color: #CF8C95;
 
-                i{
+                i {
                     font-size: 1.3em;
                 }
 
-                &:hover{
+                &:hover {
                     transform: scale(1.1);
                 }
             }
 
-            li > .opcoes{
-                i{
+            li>.opcoes {
+                i {
                     color: #CF8C95;
                     font-size: 1.3em;
-                    
+
                 }
             }
         }
     }
+}
+
+@media (min-width: 375px) and (max-width: 430px) {
+    .header-conatiner {
+        width: 100%;
+
+        .links {
+            width: 50%;
+            padding-right: 0;
+
+            ul {
+                width: 100%;
+                padding: 0;
+                padding-right: 5%;
+                justify-content: end;
+
+                li{
+                    padding: 0 2%;
+                }
+            }
+        }
+    }
+
+    // .header-conatiner>.links {
+    //     width: 90% !important;
+
+    //     ul {
+    //         border: 1px solid red;
+    //         width: 90%;
+    //         li> a, .btn-cart {
+    //             color: red;
+    //         }
+    //     }
+    // }
 }
