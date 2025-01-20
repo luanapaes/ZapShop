@@ -13,69 +13,56 @@
 
             p,
             a,
-            button {
+            i {
                 margin: 0 30px 0 0;
-                font-size: 1.2em;
+                font-size: 1.3em;
             }
 
             a {
                 text-decoration: none;
-                background: #fff;
-                border: 1px solid #D9A3AC;
-                color: #CF8C95;
-                padding: 3px;
-                text-align: center;
-                transition: all .4s ease-out;
+                color: #d16a78;
 
-                &:hover {
-                    background-color: #ECECEC;
+            }
+
+        }
+    }
+}
+
+// mexer só na responsividade
+
+@media (min-width: 375px) and (max-width: 430px) {
+    .adm-container {
+        .info-contant {
+            display: flex;
+            justify-content: end;
+
+            div {
+                margin: 0;
+                width: 45%;
+                align-items: center;
+                justify-content: space-around;
+
+                p,
+                a {
+                    margin: 0;
+                }
+
+                i{
+                    margin: 0;
                 }
             }
-
-            button {
-                background: #fff;
-                border: 1px solid #D9A3AC;
-                color: #CF8C95;
-                font-weight: bold;
-                border-radius: 5px;
-                padding: 8px 10px;
-
-                margin-bottom: 10px;
-                transition: all .4s ease-in;
-            }
-
-            button:hover {
-                cursor: pointer;
-            }
         }
     }
 }
 
-@media screen and (max-width: 768px) {
-    .info-contant {
-        div {
-            p {
-                margin: 0;
-            }
-        }
-    }
-}
+@media (min-width: 360px) and (max-width: 360px){
+    .adm-container {
+        .info-contant{
+            div{
 
-@media screen and (max-width: 450px) {
-    .info-contant {
-        div {
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: space-around !important;
-
-            p,
-            a,
-            button {
-                width: 40%;
-            }
-
-            p {
-                margin-bottom: 6px !important;
+                a{
+                    margin: 0;
+                }
             }
         }
     }
