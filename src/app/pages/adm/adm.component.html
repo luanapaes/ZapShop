@@ -3,10 +3,10 @@
 
     <div class="info-contant">
         <div>
-            <p>Produtos cadastrados: {{produtos().length}}</p>
-            <a routerLink="/cadastrar-produto">Adicionar produto</a>
-            <p>Marcas cadastradas: {{marcas.length}}</p>
-            <button (click)="openDialog()">Adicionar marca</button>
+            <p>{{produtos().length}} produtos</p>
+            <a routerLink="/cadastrar-produto">
+                <i class="fas fa-plus-circle"></i>
+            </a>
         </div>
     </div>
 
