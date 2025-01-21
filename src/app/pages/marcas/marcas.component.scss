@@ -157,3 +157,49 @@
         white-space: nowrap;
     }
 }
+
+// melhora a responsividade para dispositivos Samsung Galaxy S8
+@media (min-width: 360px) and (max-width: 360px) {
+    .marcas-container {
+        .content {
+            margin-left: 4px;
+            width: 100%;
+
+            .list-content {
+                width: 100%;
+                align-items: end;
+
+                ul {
+                    width: 40%;
+                    padding: 0;
+                    justify-content: space-around;
+
+                    li {
+                        button {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .styled-table {
+            margin: 0;
+            min-width: 350px;
+        }
+
+        .table-container {
+            align-items: stretch;
+        }
+
+    }
+
+    //limita exibição das categorias
+    .hidden {
+        max-width: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+}
