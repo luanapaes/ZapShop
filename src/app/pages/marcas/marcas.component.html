@@ -4,9 +4,11 @@
     <div class="content">
         <div class="list-content">
             <ul>
-                <li class="text">Marcas cadastradas: {{arrayMarcas.length}}</li>
+                <li class="text">{{arrayMarcas.length}} marcas</li>
                 <li>
-                    <button (click)="openDialog()">Adicionar marca</button>
+                    <button (click)="openDialog()">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -27,7 +29,7 @@
                     @for (marca of arrayMarcas; track marca.id) {
                     <tr>
                         <td>{{ marca.nome_marca }}</td>
-                        <td>{{ marca.categorias}}</td>
+                        <td class="hidden">{{ marca.categorias}}</td>
                         
                         <td class="btn-options">
                             <span>
