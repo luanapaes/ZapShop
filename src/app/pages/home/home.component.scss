@@ -56,17 +56,39 @@ body {
 }
 
 @media (min-width: 375px) and (max-width: 430px) {
-    .marcas > h2{
+    .container {
+        margin-top: -20%;
+        background-size: auto;
+        height: 450px;
+        background-position: bottom center;
+    }
+
+    .marcas>h2 {
         margin-top: 8%;
         font-size: 1.8em;
     }
 
-    .conheca{
+    .conheca {
         margin-top: 5%;
 
-        h1{
+        h1 {
             font-size: 1.6em;
             text-align: center;
         }
     }
+}
+
+@media (min-width: 360px) and (max-width: 360px) {
+    .conheca {
+        margin: 40px 0;
+
+        h1 {
+            font-size: 1.5em;
+            text-align: center;
+        }
+    }
+
+        .marcas>h2 {
+            font-size: 1.5em;
+        }
 }
