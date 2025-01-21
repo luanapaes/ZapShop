@@ -82,14 +82,31 @@
             ul {
                 width: 100%;
                 padding: 0;
-                padding-right: 15%;
                 justify-content: end;
 
-                li{
+                li {
                     padding: 0 2%;
                 }
             }
         }
     }
 
+}
+
+// melhora a responsividade para dispositivos Samsung Galaxy S8
+@media (min-width: 360px) and (max-width: 360px) {
+    .header-conatiner {
+        width: 100%;
+
+        .links {
+            width: 50%;
+            padding-right: 0;
+
+            ul {
+                width: 100%;
+                padding: 0;
+                justify-content: end;
+            }
+        }
+    }
 }
