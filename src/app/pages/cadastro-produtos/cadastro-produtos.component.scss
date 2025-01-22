@@ -19,14 +19,38 @@
     }
 }
 
-@media screen and (max-width: 780px) {
-    .create-container>div {
-        .btn-back {
-            margin-left: 10px;
+@media (min-width: 375px) and (max-width: 430px) {
+    .create-container {
+        div {
+            .btn-back {
+                margin-left: 12px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
         }
 
-        h1 {
-            margin-left: 20px;
+        app-form-add-produto {
+            margin-top: 20px;
+        }
+    }
+}
+
+@media (min-width: 360px) and (max-width: 360px) {
+    .create-container {
+        div {
+            .btn-back {
+                margin-left: 12px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        app-form-add-produto {
+            margin-top: 15px;
         }
     }
 }
