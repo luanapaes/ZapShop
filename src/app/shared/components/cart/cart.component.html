@@ -23,17 +23,6 @@
     </mat-select>
   </mat-form-field>
 
-  @if (pay == 'Cartão') {
-  <mat-form-field>
-    <mat-label>Parcelas</mat-label>
-    <mat-select [(value)]="parcela">
-      @for (parcela of parcelas; track parcela) {
-      <mat-option value="{{parcela}}">{{parcela}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-  }
-
   <label>Receber em casa?
     <mat-radio-group [(ngModel)]="entrega" aria-label="Entregar produto na sua casa?">
       <mat-radio-button value="1">Sim</mat-radio-button>
@@ -42,10 +31,7 @@
   </label>
 
   <span>Forma de pagamento: {{pay}}</span>
-  @if (pay == 'Cartão') {
-  <span>Qtd de parcelas: {{parcela}}</span>
-  <span>Valor de cada parcela {{ calcularParcelas()| currency : 'BRL'}}</span>
-  }
+
   <span>Total {{ calcularCarrinho()| currency : 'BRL'}}</span>
 </mat-dialog-content>
 

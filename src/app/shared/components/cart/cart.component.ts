@@ -35,8 +35,6 @@ export class CartComponent {
 
   pay = '';
 
-  parcelas: number[] = [1, 2, 3, 4, 5, 6];
-
   parcela = 0;
 
   total = signal(0)
@@ -70,7 +68,6 @@ export class CartComponent {
 
   carregarProdutos() {
     this.produtosCarrinho = this.carrinho.getProdutosCarrinho()
-    console.log(this.produtosCarrinho)
   }
 
   calcularCarrinho() {
@@ -93,13 +90,8 @@ export class CartComponent {
 
   finalizarPedido() {
     if (this.produtosCarrinho.length > 0) {
-      let mensagem = `Olá, me chamo ${this.usernameLocalStorage.firstCtrl}! Selecionei alguns produtos do catálogo e gostaria de finalizar a compra. 😊\n\nProdutos:${this.produtosCarrinho.map((prod) => { return prod.nome_produto.replace('', ' ') + " - " + prod.qtd_product + " " + "uni" })
-        }.\nPreço total da compra: R$${this.calcularCarrinho().toFixed(2)}.`;
-
-      if (this.parcela) {
-        const valorParcela = this.calcularParcelas();
-        mensagem += `\nForma de pagamento: ${this.pay}. \nParcelado em ${this.parcela}x de R$${valorParcela.toFixed(2)}.`;
-      }
+      let mensagem = `Olá, me chamo ${this.usernameLocalStorage.firstCtrl}! Selecionei alguns produtos do catálogo e gostaria de finalizar a compra. 😊
+      \nProdutos:${this.produtosCarrinho.map((prod) => { return prod.nome_produto.replace('', ' ') + " - " + prod.qtd_product + " " + "uni" })}. \nForma de pagamento: ${this.pay} - Preço total R$${this.calcularCarrinho().toFixed(2)}`;
 
       if (this.entrega == 1) {
         mensagem += `\nDesejo receber o produto no seguinte endereço: ${this.userAdressLocalStorage.secondCtrl}`
