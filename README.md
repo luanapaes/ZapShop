@@ -16,9 +16,10 @@ Angular Material<br>
 WhatsApp API
 
 ## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Vídeo demonstrativo do sistema
+**OBS:** O vídeo de demonstração foi acelerado (16x) para caber no repositório.  
+Para visualizar na velocidade normal, altere a velocidade do player para **0.5x**.
 
 https://github.com/user-attachments/assets/08fd27b4-9749-4536-ba41-28ab886b5ac2
-
-
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
